@@ -8,8 +8,10 @@ export type DJ = {
 
 export const fallbackPortraits = ["/djs/dj1.png", "/djs/dj2.png", "/djs/dj3.png", "/djs/dj4.png", "/djs/dj5.png", "/djs/dj6.png"];
 
-const roster: Omit<DJ, "image">[] = [
-  { stageName: "Cid Ray", username: "@djcidray", subtitle: "DJ", instagram: "https://instagram.com/djcidray" },
+type RosterEntry = Omit<DJ, "image"> & { image?: string };
+
+const roster: RosterEntry[] = [
+  { stageName: "Cid Ray", username: "@djcidray", subtitle: "DJ", image: "/djs/djcidray.jpg", instagram: "https://instagram.com/djcidray" },
   { stageName: "DJ Zitro", username: "@djzitro_", subtitle: "DJ", instagram: "https://instagram.com/djzitro_" },
   { stageName: "DJ Nonstopp", username: "@djnonstopp", subtitle: "DJ", instagram: "https://instagram.com/djnonstopp" },
   { stageName: "DJ Kid Kreo", username: "@djkidkreo", subtitle: "DJ", instagram: "https://instagram.com/djkidkreo" },
@@ -29,7 +31,7 @@ const roster: Omit<DJ, "image">[] = [
 
 export const djs: DJ[] = roster.map((dj, i) => ({
   ...dj,
-  image: fallbackPortraits[i % fallbackPortraits.length],
+  image: dj.image ?? fallbackPortraits[i % fallbackPortraits.length],
 }));
 
 export function handleDjImgError(e: React.SyntheticEvent<HTMLImageElement>, index: number) {
