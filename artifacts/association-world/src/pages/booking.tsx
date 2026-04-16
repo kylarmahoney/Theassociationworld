@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useSubmitBooking } from "@workspace/api-client-react";
+import { djs } from "@/data/djs";
 
 const bookingSchema = z.object({
   name: z.string().min(1, "Name is required").max(200),
@@ -202,12 +203,11 @@ export default function Booking() {
                                 <SelectItem value="No preference">No preference</SelectItem>
                                 <SelectGroup>
                                   <SelectLabel className="text-primary/80 uppercase tracking-widest text-[10px]">DJs — The Roster</SelectLabel>
-                                  <SelectItem value="ASSOCIATION WORLD">ASSOCIATION WORLD</SelectItem>
-                                  <SelectItem value="NOCTURNE">NOCTURNE</SelectItem>
-                                  <SelectItem value="SAINT MIDNIGHT">SAINT MIDNIGHT</SelectItem>
-                                  <SelectItem value="ORACLE">ORACLE</SelectItem>
-                                  <SelectItem value="VESPER">VESPER</SelectItem>
-                                  <SelectItem value="IRON TONGUE">IRON TONGUE</SelectItem>
+                                  {djs.map((dj) => (
+                                    <SelectItem key={dj.username} value={dj.stageName}>
+                                      {dj.stageName}
+                                    </SelectItem>
+                                  ))}
                                 </SelectGroup>
                                 <SelectGroup>
                                   <SelectLabel className="text-primary/80 uppercase tracking-widest text-[10px]">Artists</SelectLabel>
