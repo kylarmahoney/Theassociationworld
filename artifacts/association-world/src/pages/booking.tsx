@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useSubmitBooking } from "@workspace/api-client-react";
 
 const bookingSchema = z.object({
@@ -198,14 +198,26 @@ export default function Booking() {
                                   <SelectValue placeholder="Select artist" />
                                 </SelectTrigger>
                               </FormControl>
-                              <SelectContent className="bg-card border-border rounded-none">
+                              <SelectContent className="bg-card border-border rounded-none max-h-80">
                                 <SelectItem value="No preference">No preference</SelectItem>
-                                <SelectItem value="ASSOCIATION WORLD">ASSOCIATION WORLD</SelectItem>
-                                <SelectItem value="NOCTURNE">NOCTURNE</SelectItem>
-                                <SelectItem value="SAINT MIDNIGHT">SAINT MIDNIGHT</SelectItem>
-                                <SelectItem value="ORACLE">ORACLE</SelectItem>
-                                <SelectItem value="VESPER">VESPER</SelectItem>
-                                <SelectItem value="IRON TONGUE">IRON TONGUE</SelectItem>
+                                <SelectGroup>
+                                  <SelectLabel className="text-primary/80 uppercase tracking-widest text-[10px]">DJs — The Roster</SelectLabel>
+                                  <SelectItem value="ASSOCIATION WORLD">ASSOCIATION WORLD</SelectItem>
+                                  <SelectItem value="NOCTURNE">NOCTURNE</SelectItem>
+                                  <SelectItem value="SAINT MIDNIGHT">SAINT MIDNIGHT</SelectItem>
+                                  <SelectItem value="ORACLE">ORACLE</SelectItem>
+                                  <SelectItem value="VESPER">VESPER</SelectItem>
+                                  <SelectItem value="IRON TONGUE">IRON TONGUE</SelectItem>
+                                </SelectGroup>
+                                <SelectGroup>
+                                  <SelectLabel className="text-primary/80 uppercase tracking-widest text-[10px]">Artists</SelectLabel>
+                                  <SelectItem value="VEIL">VEIL</SelectItem>
+                                  <SelectItem value="OBSIDIAN HAND">OBSIDIAN HAND</SelectItem>
+                                  <SelectItem value="SISTER NOIR">SISTER NOIR</SelectItem>
+                                  <SelectItem value="THE SCRIBE">THE SCRIBE</SelectItem>
+                                  <SelectItem value="PALE ENGINE">PALE ENGINE</SelectItem>
+                                  <SelectItem value="HOLY GHOST CHOIR">HOLY GHOST CHOIR</SelectItem>
+                                </SelectGroup>
                               </SelectContent>
                             </Select>
                             <FormMessage className="text-primary/80 text-xs" />
