@@ -200,7 +200,7 @@ export default function Booking() {
                               </FormControl>
                               <SelectContent className="bg-card border-border rounded-none">
                                 <SelectItem value="No preference">No preference</SelectItem>
-                                <SelectItem value="THE COVENANT">THE COVENANT</SelectItem>
+                                <SelectItem value="ASSOCIATION WORLD">ASSOCIATION WORLD</SelectItem>
                                 <SelectItem value="NOCTURNE">NOCTURNE</SelectItem>
                                 <SelectItem value="SAINT MIDNIGHT">SAINT MIDNIGHT</SelectItem>
                                 <SelectItem value="ORACLE">ORACLE</SelectItem>

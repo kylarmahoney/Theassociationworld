@@ -59,7 +59,7 @@ export default function Home() {
             >
               <motion.div variants={revealVariants} className="space-y-4">
                 <h1 className="text-5xl md:text-7xl lg:text-9xl font-serif text-transparent bg-clip-text bg-gradient-to-b from-white via-white/80 to-white/40 tracking-[0.1em] drop-shadow-[0_0_30px_rgba(201,169,97,0.3)]">
-                  THE COVENANT
+                  ASSOCIATION WORLD
                 </h1>
                 <p className="text-primary tracking-[0.3em] md:tracking-[0.5em] text-sm md:text-base uppercase font-medium">
                   Loyalty. Silence. Unity.

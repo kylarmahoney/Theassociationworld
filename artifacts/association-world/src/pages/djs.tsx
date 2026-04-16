@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 
 const djs = [
-  { id: 1, name: "THE COVENANT", genre: "Curator / Founder", image: "/djs/dj1.png" },
+  { id: 1, name: "ASSOCIATION WORLD", genre: "Curator / Founder", image: "/djs/dj1.png" },
   { id: 2, name: "NOCTURNE", genre: "Deep House / Melodic Techno", image: "/djs/dj2.png" },
   { id: 3, name: "SAINT MIDNIGHT", genre: "Afro House / Organic", image: "/djs/dj3.png" },
   { id: 4, name: "ORACLE", genre: "Progressive / Dark", image: "/djs/dj4.png" },
