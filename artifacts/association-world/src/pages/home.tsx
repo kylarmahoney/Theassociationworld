@@ -84,7 +84,7 @@ export default function Home() {
               </motion.div>
               
               <motion.div variants={revealVariants} className="max-w-2xl text-muted-foreground/80 leading-relaxed font-light">
-                <p>Not entertainment. A movement.</p>
+                <p>Not Entertainment. A Movement.</p>
                 <p>We dictate the pulse of the night.</p>
               </motion.div>
 
