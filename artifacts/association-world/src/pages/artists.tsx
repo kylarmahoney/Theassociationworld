@@ -4,12 +4,12 @@ import { PageLayout, revealVariants, staggerContainer } from "@/components/layou
 import { Button } from "@/components/ui/button";
 
 const artists = [
-  { id: 1, name: "VEIL", discipline: "Vocalist / Songwriter", bio: "A voice carved from smoke. Anonymous by design." },
-  { id: 2, name: "OBSIDIAN HAND", discipline: "Producer / Composer", bio: "Architect of low-end cathedrals and orchestral decay." },
-  { id: 3, name: "SISTER NOIR", discipline: "Live Performer", bio: "Cello and tape loops in candlelit basements." },
-  { id: 4, name: "THE SCRIBE", discipline: "Lyricist / Spoken Word", bio: "Words for those who refuse to speak first." },
-  { id: 5, name: "PALE ENGINE", discipline: "Multi-Instrumentalist", bio: "Analog synths, modular rituals, broken machines." },
-  { id: 6, name: "HOLY GHOST CHOIR", discipline: "Vocal Ensemble", bio: "Three voices. One breath. Unlisted recordings only." },
+  { id: 1, name: "VEIL", discipline: "Vocalist / Songwriter", bio: "A voice carved from smoke. Anonymous by design.", photo: "/djs/dj1.png" },
+  { id: 2, name: "OBSIDIAN HAND", discipline: "Producer / Composer", bio: "Architect of low-end cathedrals and orchestral decay.", photo: "/djs/dj2.png" },
+  { id: 3, name: "SISTER NOIR", discipline: "Live Performer", bio: "Cello and tape loops in candlelit basements.", photo: "/djs/dj3.png" },
+  { id: 4, name: "THE SCRIBE", discipline: "Lyricist / Spoken Word", bio: "Words for those who refuse to speak first.", photo: "/djs/dj4.png" },
+  { id: 5, name: "PALE ENGINE", discipline: "Multi-Instrumentalist", bio: "Analog synths, modular rituals, broken machines.", photo: "/djs/dj5.png" },
+  { id: 6, name: "HOLY GHOST CHOIR", discipline: "Vocal Ensemble", bio: "Three voices. One breath. Unlisted recordings only.", photo: "/djs/dj6.png" },
 ];
 
 export default function Artists() {
@@ -41,19 +41,33 @@ export default function Artists() {
                 className="group relative"
               >
                 <div className="aspect-[3/4] overflow-hidden rounded-sm bg-secondary relative border border-border/20 group-hover:border-primary/50 transition-colors duration-500 shadow-xl">
-                  <div className="absolute inset-0 bg-gradient-to-b from-zinc-900 via-black to-zinc-950" />
-                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(201,169,97,0.12),transparent_60%)] opacity-60 group-hover:opacity-100 transition-opacity duration-700" />
-                  <div className="absolute inset-0 flex items-center justify-center opacity-30 group-hover:opacity-50 transition-opacity duration-700">
-                    <img
-                      src="/brand/logo-seal.png"
-                      alt=""
-                      aria-hidden="true"
-                      className="w-1/2 object-contain mix-blend-screen filter grayscale group-hover:grayscale-0 transition-all duration-700"
-                    />
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-90" />
+                  {/* LAYER 1 — Revealed photo (underneath) */}
+                  <img
+                    src={artist.photo}
+                    alt={artist.name}
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover filter grayscale contrast-110 opacity-0 scale-110 group-hover:opacity-100 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-[1100ms] ease-out"
+                  />
 
-                  <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                  {/* LAYER 2 — Silhouette (on top, fades out on hover) */}
+                  <div className="absolute inset-0 transition-opacity duration-700 group-hover:opacity-0">
+                    <div className="absolute inset-0 bg-gradient-to-b from-zinc-900 via-black to-zinc-950" />
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(201,169,97,0.12),transparent_60%)]" />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <img
+                        src="/brand/logo-seal.png"
+                        alt=""
+                        aria-hidden="true"
+                        className="w-1/2 object-contain opacity-30 mix-blend-screen filter grayscale"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Bottom gradient always present for legibility */}
+                  <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-background via-background/60 to-transparent pointer-events-none z-10" />
+
+                  {/* Text content */}
+                  <div className="absolute inset-0 p-8 flex flex-col justify-end z-20">
                     <h2 className="text-2xl lg:text-3xl font-serif text-primary uppercase tracking-widest mb-2 drop-shadow-[0_0_10px_rgba(201,169,97,0.5)]">
                       {artist.name}
                     </h2>

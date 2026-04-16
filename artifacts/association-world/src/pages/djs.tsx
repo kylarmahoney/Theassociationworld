@@ -2,71 +2,170 @@ import { motion } from "framer-motion";
 import { PageLayout, revealVariants, staggerContainer } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import { Instagram } from "lucide-react";
 
-const djs = [
-  { id: 1, name: "ASSOCIATION WORLD", genre: "Curator / Founder", image: "/djs/dj1.png" },
-  { id: 2, name: "NOCTURNE", genre: "Deep House / Melodic Techno", image: "/djs/dj2.png" },
-  { id: 3, name: "SAINT MIDNIGHT", genre: "Afro House / Organic", image: "/djs/dj3.png" },
-  { id: 4, name: "ORACLE", genre: "Progressive / Dark", image: "/djs/dj4.png" },
-  { id: 5, name: "VESPER", genre: "Minimal / Tech", image: "/djs/dj5.png" },
-  { id: 6, name: "IRON TONGUE", genre: "Industrial / Peak Time", image: "/djs/dj6.png" },
+type DJ = {
+  stageName: string;
+  username: string;
+  subtitle: string;
+  image: string;
+  instagram: string;
+};
+
+const djs: DJ[] = [
+  { stageName: "Cid Ray", username: "@djcidray", subtitle: "DJ", image: "/images/djs/djcidray.jpg", instagram: "https://instagram.com/djcidray" },
+  { stageName: "DJ Zitro", username: "@djzitro_", subtitle: "DJ", image: "/images/djs/djzitro.jpg", instagram: "https://instagram.com/djzitro_" },
+  { stageName: "DJ Nonstopp", username: "@djnonstopp", subtitle: "DJ", image: "/images/djs/djnonstopp.jpg", instagram: "https://instagram.com/djnonstopp" },
+  { stageName: "DJ Kid Kreo", username: "@djkidkreo", subtitle: "DJ", image: "/images/djs/djkidkreo.jpg", instagram: "https://instagram.com/djkidkreo" },
+  { stageName: "DJ NickyZ", username: "@infamousnickyz", subtitle: "DJ", image: "/images/djs/infamousnickyz.jpg", instagram: "https://instagram.com/infamousnickyz" },
+  { stageName: "Go DJ Jemini", username: "@godjjemini", subtitle: "DJ", image: "/images/djs/godjjemini.jpg", instagram: "https://instagram.com/godjjemini" },
+  { stageName: "DJ Jay", username: "@djjaytx", subtitle: "DJ", image: "/images/djs/djjaytx.jpg", instagram: "https://instagram.com/djjaytx" },
+  { stageName: "Mad Sounds", username: "@djmadsounds", subtitle: "DJ", image: "/images/djs/djmadsounds.jpg", instagram: "https://instagram.com/djmadsounds" },
+  { stageName: "StandMan409", username: "@djstandman409", subtitle: "DJ", image: "/images/djs/djstandman409.jpg", instagram: "https://instagram.com/djstandman409" },
+  { stageName: "WKD", username: "@djwkd23", subtitle: "DJ", image: "/images/djs/djwkd23.jpg", instagram: "https://instagram.com/djwkd23" },
+  { stageName: "RNZO DTX", username: "@djrnzodtx", subtitle: "DJ", image: "/images/djs/djrnzodtx.jpg", instagram: "https://instagram.com/djrnzodtx" },
+  { stageName: "Kevin Banks", username: "@kvnbnks", subtitle: "Artist / DJ", image: "/images/djs/kvnbnks.jpg", instagram: "https://instagram.com/kvnbnks" },
+  { stageName: "Jacob Andrew", username: "@_jacobandrew", subtitle: "Artist / Producer", image: "/images/djs/jacobandrew.jpg", instagram: "https://instagram.com/_jacobandrew" },
+  { stageName: "DJ ANARCHY", username: "@djanarchyrmx", subtitle: "Open Format DJ", image: "/images/djs/djanarchyrmx.jpg", instagram: "https://instagram.com/djanarchyrmx" },
+  { stageName: "Tony Bangz", username: "@djtonybangz", subtitle: "Resident DJ", image: "/images/djs/djtonybangz.jpg", instagram: "https://instagram.com/djtonybangz" },
+  { stageName: "DJ Ex", username: "@iamdjex", subtitle: "Producer / DJ / Creative Director", image: "/images/djs/iamdjex.jpg", instagram: "https://instagram.com/iamdjex" },
 ];
+
+const fallbackPortraits = ["/djs/dj1.png", "/djs/dj2.png", "/djs/dj3.png", "/djs/dj4.png", "/djs/dj5.png", "/djs/dj6.png"];
+
+function handleImgError(e: React.SyntheticEvent<HTMLImageElement>, index: number) {
+  const img = e.currentTarget;
+  if (!img.dataset.fallback) {
+    img.dataset.fallback = "true";
+    img.src = fallbackPortraits[index % fallbackPortraits.length];
+  }
+}
 
 export default function DJs() {
   return (
     <PageLayout>
-      <div className="pt-32 pb-20 relative">
-        <div className="container px-6 md:px-12 mx-auto text-center space-y-6 relative z-10">
+      {/* HERO */}
+      <section className="pt-36 pb-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(201,169,97,0.08),transparent_60%)]" />
+        <div className="container px-6 md:px-12 mx-auto text-center space-y-8 relative z-10">
           <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="space-y-6">
-            <motion.h1 variants={revealVariants} className="text-4xl md:text-6xl font-serif uppercase tracking-[0.15em] text-primary">
+            <motion.p variants={revealVariants} className="text-primary/70 text-[10px] tracking-[0.5em] uppercase">
+              Est. MMXXV · The Collective
+            </motion.p>
+            <motion.h1
+              variants={revealVariants}
+              className="text-5xl md:text-7xl lg:text-8xl font-serif uppercase tracking-[0.12em] text-transparent bg-clip-text bg-gradient-to-b from-[#f5e6b8] via-[#c9a961] to-[#8a6f2e] drop-shadow-[0_0_40px_rgba(201,169,97,0.35)]"
+            >
               The Roster
             </motion.h1>
-            <motion.p variants={revealVariants} className="text-muted-foreground tracking-[0.2em] text-sm md:text-base max-w-2xl mx-auto uppercase">
+            <motion.div variants={revealVariants} className="h-px w-32 mx-auto bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
+            <motion.p variants={revealVariants} className="text-muted-foreground/90 tracking-[0.25em] text-xs md:text-sm max-w-xl mx-auto uppercase font-light">
               Architects of sound. Bound by silence.
             </motion.p>
           </motion.div>
         </div>
-      </div>
+      </section>
 
-      <section className="py-12 bg-background">
-        <div className="container px-6 md:px-12 mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-            {djs.map((dj, i) => (
-              <motion.div
-                key={dj.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.8, delay: (i % 3) * 0.1 }}
-                className="group relative"
-              >
-                <div className="aspect-[3/4] overflow-hidden rounded-sm bg-secondary relative border border-border/20 group-hover:border-primary/50 transition-colors duration-500 shadow-xl">
-                  <img 
-                    src={dj.image} 
-                    alt={dj.name} 
-                    className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105 filter grayscale hover:grayscale-0"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-90 group-hover:opacity-80 transition-opacity" />
-                  
-                  <div className="absolute inset-0 p-8 flex flex-col justify-end transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                    <h2 className="text-2xl lg:text-3xl font-serif text-primary uppercase tracking-widest mb-2 drop-shadow-[0_0_10px_rgba(201,169,97,0.5)]">
-                      {dj.name}
-                    </h2>
-                    <p className="text-xs tracking-[0.2em] text-foreground/80 uppercase mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                      {dj.genre}
-                    </p>
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
-                      <Link href={`/booking?artist=${encodeURIComponent(dj.name)}`}>
-                        <Button className="w-full bg-primary/10 hover:bg-primary text-primary hover:text-primary-foreground border border-primary uppercase tracking-widest text-xs rounded-none">
+      {/* GRID */}
+      <section className="pb-32 bg-background">
+        <div className="container px-6 md:px-12 mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-16 md:gap-y-20">
+            {djs.map((dj, i) => {
+              const number = String(i + 1).padStart(2, "0");
+              return (
+                <motion.div
+                  key={dj.username}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.7, delay: (i % 4) * 0.08 }}
+                  className="group relative"
+                >
+                  {/* Portrait frame */}
+                  <div className="relative aspect-[3/4] overflow-hidden bg-zinc-950 rounded-sm shadow-[0_25px_60px_-20px_rgba(0,0,0,0.8)] transition-all duration-700 group-hover:shadow-[0_35px_80px_-20px_rgba(201,169,97,0.35)] group-hover:-translate-y-1">
+                    {/* Hairline gold frame */}
+                    <div className="absolute inset-0 border border-border/40 group-hover:border-primary/60 transition-colors duration-700 z-30 pointer-events-none" />
+                    <div className="absolute inset-[3px] border border-primary/0 group-hover:border-primary/10 transition-colors duration-700 z-30 pointer-events-none" />
+
+                    {/* Image */}
+                    <img
+                      src={dj.image}
+                      alt={dj.stageName}
+                      loading="lazy"
+                      onError={(e) => handleImgError(e, i)}
+                      className="absolute inset-0 w-full h-full object-cover transition-all duration-[1200ms] ease-out filter grayscale contrast-110 brightness-90 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105"
+                    />
+
+                    {/* Film vignette */}
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.75)_100%)] pointer-events-none z-10" />
+
+                    {/* Bottom gradient */}
+                    <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-background via-background/70 to-transparent pointer-events-none z-10" />
+
+                    {/* Light sweep on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-primary/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-[1400ms] ease-out pointer-events-none z-20" />
+
+                    {/* Number tag */}
+                    <div className="absolute top-5 left-5 text-[10px] tracking-[0.35em] text-primary/60 font-light z-20">
+                      {number}
+                    </div>
+
+                    {/* Instagram */}
+                    <a
+                      href={dj.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${dj.stageName} on Instagram`}
+                      className="absolute top-5 right-5 w-8 h-8 rounded-full border border-primary/30 flex items-center justify-center text-primary/70 hover:text-primary hover:border-primary hover:bg-primary/10 transition-all duration-500 opacity-0 group-hover:opacity-100 z-30 backdrop-blur-sm"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <Instagram size={14} />
+                    </a>
+
+                    {/* Book button slides up */}
+                    <div className="absolute inset-x-5 bottom-5 z-20 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                      <Link href={`/booking?artist=${encodeURIComponent(dj.stageName)}`}>
+                        <Button className="w-full bg-primary/10 hover:bg-primary text-primary hover:text-primary-foreground border border-primary/80 uppercase tracking-[0.25em] text-[10px] rounded-none h-9 backdrop-blur-sm">
                           Request Booking
                         </Button>
                       </Link>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+
+                  {/* Meta below frame */}
+                  <div className="pt-6 space-y-2 text-center">
+                    <h2 className="font-serif text-xl md:text-2xl uppercase tracking-[0.15em] text-foreground group-hover:text-primary transition-colors duration-500">
+                      {dj.stageName}
+                    </h2>
+                    <div className="mx-auto h-px w-8 bg-primary/40 group-hover:w-16 group-hover:bg-primary transition-all duration-500" />
+                    <p className="text-[10px] tracking-[0.3em] text-muted-foreground/80 uppercase">
+                      {dj.subtitle}
+                    </p>
+                    <p className="text-[11px] tracking-[0.2em] text-primary/60 font-light">
+                      {dj.username}
+                    </p>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
+
+          {/* Footer note */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="mt-32 text-center border-t border-border/30 pt-16 max-w-2xl mx-auto"
+          >
+            <p className="text-muted-foreground/80 mb-8 font-light tracking-wide">
+              Every booking is handled in confidence by our management.
+            </p>
+            <Link href="/booking">
+              <Button variant="outline" className="border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground tracking-[0.25em] uppercase rounded-none px-10 text-xs">
+                Begin an Inquiry
+              </Button>
+            </Link>
+          </motion.div>
         </div>
       </section>
     </PageLayout>
