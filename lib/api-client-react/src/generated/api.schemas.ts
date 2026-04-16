@@ -8,3 +8,64 @@
 export interface HealthStatus {
   status: string;
 }
+
+export interface ContactSubmission {
+  /**
+   * @minLength 1
+   * @maxLength 200
+   */
+  name: string;
+  /** @maxLength 200 */
+  email: string;
+  /**
+   * @minLength 1
+   * @maxLength 200
+   */
+  subject: string;
+  /**
+   * @minLength 1
+   * @maxLength 5000
+   */
+  message: string;
+}
+
+export interface BookingSubmission {
+  /**
+   * @minLength 1
+   * @maxLength 200
+   */
+  name: string;
+  /** @maxLength 200 */
+  email: string;
+  /** @maxLength 50 */
+  phone?: string;
+  /**
+   * @minLength 1
+   * @maxLength 100
+   */
+  eventType: string;
+  /** @maxLength 100 */
+  eventDate: string;
+  /**
+   * @minLength 1
+   * @maxLength 300
+   */
+  eventLocation: string;
+  /**
+   * @minLength 1
+   * @maxLength 100
+   */
+  artist: string;
+  /** @maxLength 100 */
+  budget?: string;
+  /** @maxLength 5000 */
+  details?: string;
+}
+
+export interface SubmissionResult {
+  ok: boolean;
+}
+
+export interface ErrorResponse {
+  error: string;
+}

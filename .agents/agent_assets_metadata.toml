@@ -1,0 +1,62 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "TzlSkCPUlMuLiRQXTjj-U"
+uri = "file://artifacts/association-world/public/djs/dj1.png"
+type = "image"
+title = "dj portrait silhouette gold rim"
+
+[[generated]]
+id = "YSVehFdgTY8FY3ZTQLAS1"
+uri = "file://artifacts/association-world/public/djs/dj2.png"
+type = "image"
+title = "dj portrait silhouette gold rim"
+
+[[generated]]
+id = "ZHXQFYMreLiZj5Hp2K_rD"
+uri = "file://artifacts/association-world/public/djs/dj3.png"
+type = "image"
+title = "dj portrait silhouette gold rim"
+
+[[generated]]
+id = "tt1tfyRbNzON_t-2bgkyM"
+uri = "file://artifacts/association-world/public/djs/dj4.png"
+type = "image"
+title = "dj portrait silhouette gold rim"
+
+[[generated]]
+id = "BB51-9r0ZEv5YOCeDTVmL"
+uri = "file://artifacts/association-world/public/djs/dj5.png"
+type = "image"
+title = "dj portrait silhouette gold rim"
+
+[[generated]]
+id = "gh5u-Ns-sqGrsUhMGBtWU"
+uri = "file://artifacts/association-world/public/djs/dj6.png"
+type = "image"
+title = "dj portrait silhouette gold rim"
+
+[[generated]]
+id = "gUsSgwfnTKDdgk0Obll1s"
+uri = "file://artifacts/association-world/public/merch/merch1.png"
+type = "image"
+title = "merch hoodie gold embroidery"
+
+[[generated]]
+id = "OxFD7QW3-h9c-8zb9dqOj"
+uri = "file://artifacts/association-world/public/merch/merch2.png"
+type = "image"
+title = "merch shirt gold embroidery"
+
+[[generated]]
+id = "4dUxkXjkXJHiAgRiR4_Kj"
+uri = "file://artifacts/association-world/public/merch/merch3.png"
+type = "image"
+title = "merch cap gold embroidery"
+
+[[generated]]
+id = "UgO0H8bWXf1mwaalFbHoq"
+uri = "file://artifacts/association-world/public/merch/merch4.png"
+type = "image"
+title = "merch hoodie gold embroidery"

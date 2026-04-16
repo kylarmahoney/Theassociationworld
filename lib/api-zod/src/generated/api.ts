@@ -14,3 +14,64 @@ import * as zod from "zod";
 export const HealthCheckResponse = zod.object({
   status: zod.string(),
 });
+
+/**
+ * Sends a contact inquiry email to management
+ * @summary Submit contact form
+ */
+export const submitContactBodyNameMax = 200;
+
+export const submitContactBodyEmailMax = 200;
+
+export const submitContactBodySubjectMax = 200;
+
+export const submitContactBodyMessageMax = 5000;
+
+export const SubmitContactBody = zod.object({
+  name: zod.string().min(1).max(submitContactBodyNameMax),
+  email: zod.string().email().max(submitContactBodyEmailMax),
+  subject: zod.string().min(1).max(submitContactBodySubjectMax),
+  message: zod.string().min(1).max(submitContactBodyMessageMax),
+});
+
+export const SubmitContactResponse = zod.object({
+  ok: zod.boolean(),
+});
+
+/**
+ * Sends a booking request email to management
+ * @summary Submit booking request
+ */
+export const submitBookingBodyNameMax = 200;
+
+export const submitBookingBodyEmailMax = 200;
+
+export const submitBookingBodyPhoneMax = 50;
+
+export const submitBookingBodyEventTypeMax = 100;
+
+export const submitBookingBodyEventDateMax = 100;
+
+export const submitBookingBodyEventLocationMax = 300;
+
+export const submitBookingBodyArtistMax = 100;
+
+export const submitBookingBodyBudgetMax = 100;
+
+export const submitBookingBodyDetailsMax = 5000;
+
+export const SubmitBookingBody = zod.object({
+  name: zod.string().min(1).max(submitBookingBodyNameMax),
+  email: zod.string().email().max(submitBookingBodyEmailMax),
+  phone: zod.string().max(submitBookingBodyPhoneMax).optional(),
+  eventType: zod.string().min(1).max(submitBookingBodyEventTypeMax),
+  eventDate: zod.string().max(submitBookingBodyEventDateMax),
+  eventLocation: zod.string().min(1).max(submitBookingBodyEventLocationMax),
+  artist: zod.string().min(1).max(submitBookingBodyArtistMax),
+  budget: zod.string().max(submitBookingBodyBudgetMax).optional(),
+  details: zod.string().max(submitBookingBodyDetailsMax).optional(),
+});
+
+export const SubmitBookingResponse = zod.object({
+  ok: zod.boolean(),
+});

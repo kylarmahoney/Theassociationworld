@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Association World"
+version = "1.0.0"
+id = "artifacts/association-world"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18346
+
+[services.development]
+run = "pnpm --filter @workspace/association-world run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/association-world", "run", "build" ]
+publicDir = "artifacts/association-world/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18346"
+BASE_PATH = "/"
