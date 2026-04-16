@@ -40,7 +40,6 @@ export default function Home() {
           </motion.div>
         )}
       </AnimatePresence>
-
       <PageLayout hideNav={showIntro} hideFooter={showIntro}>
         {/* HERO SECTION */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
@@ -73,9 +72,8 @@ export default function Home() {
 
               <motion.div variants={revealVariants} className="pt-8">
                 <Link href="/booking">
-                  <Button size="lg" className="bg-primary/10 hover:bg-primary text-primary hover:text-primary-foreground border border-primary px-12 py-8 text-sm tracking-[0.2em] uppercase rounded-none transition-all duration-700 shadow-[0_0_20px_rgba(201,169,97,0.2)] hover:shadow-[0_0_40px_rgba(201,169,97,0.6)]">
-                    Enter the fold
-                  </Button>
+                  <Button size="lg" className="bg-primary/10 hover:bg-primary text-primary hover:text-primary-foreground border border-primary px-12 py-8 text-sm tracking-[0.2em] uppercase rounded-none transition-all duration-700 shadow-[0_0_20px_rgba(201,169,97,0.2)] hover:shadow-[0_0_40px_rgba(201,169,97,0.6)]">Booking Information
+</Button>
                 </Link>
               </motion.div>
             </motion.div>
