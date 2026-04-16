@@ -3,10 +3,10 @@ import { PageLayout, revealVariants, staggerContainer } from "@/components/layou
 import { Button } from "@/components/ui/button";
 
 const products = [
-  { id: 1, name: "SEAL HOODIE", price: "$185", logo: "/brand/logo-seal.png", logoClass: "w-2/3", isExclusive: false },
-  { id: 2, name: "SEAL TEE", price: "$85", logo: "/brand/logo-seal.png", logoClass: "w-1/2", isExclusive: false },
-  { id: 3, name: "MASCOT HOODIE", price: "$195", logo: "/brand/mascot.png", logoClass: "w-2/3", isExclusive: false },
-  { id: 4, name: "MASCOT TEE", price: "$90", logo: "/brand/mascot.png", logoClass: "w-1/2", isExclusive: true },
+  { id: 1, name: "SEAL HOODIE", price: "$185", image: "/merch/merch1.png", isExclusive: false },
+  { id: 2, name: "COVENANT SHIRT", price: "$85", image: "/merch/merch2.png", isExclusive: false },
+  { id: 3, name: "INITIATE HAT", price: "$65", image: "/merch/merch3.png", isExclusive: false },
+  { id: 4, name: "MASCOT CREWNECK", price: "$145", image: "/merch/merch4.png", isExclusive: true },
 ];
 
 export default function Merch() {
@@ -41,9 +41,9 @@ export default function Merch() {
                   <div className="absolute inset-0 bg-gradient-to-b from-black via-zinc-950 to-black" />
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(201,169,97,0.08),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                   <img
-                    src={product.logo}
+                    src={product.image}
                     alt={product.name}
-                    className={`relative ${product.logoClass} object-contain opacity-80 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105 drop-shadow-[0_0_25px_rgba(201,169,97,0.25)] group-hover:drop-shadow-[0_0_45px_rgba(201,169,97,0.5)]`}
+                    className="relative w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
                   />
                   {product.isExclusive && (
                     <div className="absolute inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center">

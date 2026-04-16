@@ -65,7 +65,7 @@ export default function Contact() {
                     Reach Out
                   </h1>
                   <p className="text-muted-foreground tracking-[0.2em] text-xs uppercase">
-                    management@theassociationworld.com
+                    management@associationworld.com
                   </p>
                 </motion.div>
 

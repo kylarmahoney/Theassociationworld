@@ -41,10 +41,10 @@ export function Footer() {
           {/* Contact & Copyright */}
           <div className="pt-12 border-t border-border/30 w-full max-w-lg flex flex-col items-center space-y-4">
             <a 
-              href="mailto:management@theassociationworld.com" 
+              href="mailto:management@associationworld.com" 
               className="text-primary/80 hover:text-primary text-sm tracking-widest transition-colors"
             >
-              management@theassociationworld.com
+              management@associationworld.com
             </a>
             <p className="text-xs text-muted-foreground/50 tracking-widest uppercase">
               &copy; {currentYear} The Association World. All Rights Reserved.
