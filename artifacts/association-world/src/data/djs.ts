@@ -24,7 +24,7 @@ const roster: RosterEntry[] = [
   { stageName: "RNZO DTX", username: "@djrnzodtx", subtitle: "DJ", image: "/djs/djrnzodtx.jpg", instagram: "https://instagram.com/djrnzodtx" },
   { stageName: "Kevin Banks", username: "@kvnbnks", subtitle: "Artist / DJ", image: "/djs/kvnbnks.jpg", instagram: "https://instagram.com/kvnbnks" },
   { stageName: "Jacob Andrew", username: "@_jacobandrew", subtitle: "Artist / Producer", image: "/djs/_jacobandrew.jpg", instagram: "https://instagram.com/_jacobandrew" },
-  { stageName: "DJ ANARCHY", username: "@djanarchyrmx", subtitle: "Open Format DJ", instagram: "https://instagram.com/djanarchyrmx" },
+  { stageName: "DJ ANARCHY", username: "@djanarchyrmx", subtitle: "Open Format DJ", image: "/djs/djanarchyrmx.jpg", instagram: "https://instagram.com/djanarchyrmx" },
   { stageName: "Tony Bangz", username: "@djtonybangz", subtitle: "Resident DJ", instagram: "https://instagram.com/djtonybangz" },
   { stageName: "DJ Ex", username: "@iamdjex", subtitle: "Producer / DJ / Creative Director", image: "/djs/iamdjex.jpg", instagram: "https://instagram.com/iamdjex" },
 ];
