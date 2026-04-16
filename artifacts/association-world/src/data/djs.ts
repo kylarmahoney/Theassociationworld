@@ -12,7 +12,7 @@ type RosterEntry = Omit<DJ, "image"> & { image?: string };
 
 const roster: RosterEntry[] = [
   { stageName: "Cid Ray", username: "@djcidray", subtitle: "DJ", image: "/djs/djcidray.jpg", instagram: "https://instagram.com/djcidray" },
-  { stageName: "DJ Zitro", username: "@djzitro_", subtitle: "DJ", instagram: "https://instagram.com/djzitro_" },
+  { stageName: "DJ Zitro", username: "@djzitro_", subtitle: "DJ", image: "/djs/djzitro.jpg", instagram: "https://instagram.com/djzitro_" },
   { stageName: "DJ Nonstopp", username: "@djnonstopp", subtitle: "DJ", instagram: "https://instagram.com/djnonstopp" },
   { stageName: "DJ Kid Kreo", username: "@djkidkreo", subtitle: "DJ", instagram: "https://instagram.com/djkidkreo" },
   { stageName: "DJ NickyZ", username: "@infamousnickyz", subtitle: "DJ", instagram: "https://instagram.com/infamousnickyz" },
