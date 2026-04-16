@@ -58,7 +58,7 @@ export default function Home() {
               className="flex flex-col items-center space-y-8"
             >
               <motion.div variants={revealVariants} className="space-y-4">
-                <h1 className="text-5xl md:text-7xl lg:text-9xl font-serif text-transparent bg-clip-text bg-gradient-to-b from-white via-white/80 to-white/40 tracking-[0.1em] drop-shadow-[0_0_30px_rgba(201,169,97,0.3)]">
+                <h1 className="text-5xl md:text-7xl lg:text-9xl font-serif text-transparent bg-clip-text bg-gradient-to-b from-[#f5e6b8] via-[#c9a961] to-[#8a6f2e] tracking-[0.1em] drop-shadow-[0_0_40px_rgba(201,169,97,0.6)]">
                   ASSOCIATION WORLD
                 </h1>
                 <p className="text-primary tracking-[0.3em] md:tracking-[0.5em] text-sm md:text-base uppercase font-medium">
