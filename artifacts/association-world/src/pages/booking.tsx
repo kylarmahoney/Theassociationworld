@@ -19,10 +19,18 @@ const bookingSchema = z.object({
   phone: z.string().max(50).optional(),
   eventType: z.string().min(1, "Event type is required").max(100),
   eventDate: z.string().min(1, "Date is required").max(100),
-  eventLocation: z.string().min(1, "Location is required").max(300),
+  duration: z.string().min(1, "Duration is required").max(100),
+  city: z.string().min(1, "City is required").max(120),
+  country: z.string().min(1, "Country is required").max(120),
+  venueName: z.string().min(1, "Venue name is required").max(200),
+  venueDirections: z.string().max(1000).optional(),
   artist: z.string().min(1, "Artist selection is required").max(100),
   budget: z.string().max(100).optional(),
+  downPayment: z.string().min(1, "Down payment is required").max(100),
   details: z.string().max(5000).optional(),
+  waiverAccepted: z.literal(true, {
+    errorMap: () => ({ message: "You must accept the waiver to submit" }),
+  }),
 });
 
 type BookingFormValues = z.infer<typeof bookingSchema>;
@@ -43,10 +51,16 @@ export default function Booking() {
       phone: "",
       eventType: "",
       eventDate: "",
-      eventLocation: "",
+      duration: "",
+      city: "",
+      country: "",
+      venueName: "",
+      venueDirections: "",
       artist: preselectedArtist,
       budget: "",
+      downPayment: "",
       details: "",
+      waiverAccepted: false as unknown as true,
     },
   });
 
@@ -173,12 +187,82 @@ export default function Booking() {
                       />
                       <FormField
                         control={form.control}
-                        name="eventLocation"
+                        name="duration"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-xs uppercase tracking-widest text-foreground/80">Location/Venue *</FormLabel>
+                            <FormLabel className="text-xs uppercase tracking-widest text-foreground/80">Booking Duration *</FormLabel>
                             <FormControl>
-                              <Input placeholder="City, Country or Venue Name" className="bg-background/50 border-border rounded-none focus-visible:ring-primary focus-visible:border-primary" {...field} />
+                              <Input placeholder="e.g. 2 hours, 4 hours, all night" className="bg-background/50 border-border rounded-none focus-visible:ring-primary focus-visible:border-primary" {...field} />
+                            </FormControl>
+                            <FormMessage className="text-primary/80 text-xs" />
+                          </FormItem>
+                        )}
+                      />
+                    </motion.div>
+
+                    <motion.div variants={revealVariants} className="space-y-1 pt-2">
+                      <p className="text-[10px] tracking-[0.25em] uppercase text-primary/70">Venue</p>
+                      <div className="h-px w-full bg-gradient-to-r from-primary/40 via-primary/10 to-transparent" />
+                    </motion.div>
+
+                    <motion.div variants={revealVariants} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <FormField
+                        control={form.control}
+                        name="city"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-xs uppercase tracking-widest text-foreground/80">City *</FormLabel>
+                            <FormControl>
+                              <Input placeholder="Houston" className="bg-background/50 border-border rounded-none focus-visible:ring-primary focus-visible:border-primary" {...field} />
+                            </FormControl>
+                            <FormMessage className="text-primary/80 text-xs" />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="country"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-xs uppercase tracking-widest text-foreground/80">Country *</FormLabel>
+                            <FormControl>
+                              <Input placeholder="United States" className="bg-background/50 border-border rounded-none focus-visible:ring-primary focus-visible:border-primary" {...field} />
+                            </FormControl>
+                            <FormMessage className="text-primary/80 text-xs" />
+                          </FormItem>
+                        )}
+                      />
+                    </motion.div>
+
+                    <motion.div variants={revealVariants}>
+                      <FormField
+                        control={form.control}
+                        name="venueName"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-xs uppercase tracking-widest text-foreground/80">Venue Name *</FormLabel>
+                            <FormControl>
+                              <Input placeholder="e.g. The Rooftop, Club Nocturne" className="bg-background/50 border-border rounded-none focus-visible:ring-primary focus-visible:border-primary" {...field} />
+                            </FormControl>
+                            <FormMessage className="text-primary/80 text-xs" />
+                          </FormItem>
+                        )}
+                      />
+                    </motion.div>
+
+                    <motion.div variants={revealVariants}>
+                      <FormField
+                        control={form.control}
+                        name="venueDirections"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-xs uppercase tracking-widest text-foreground/80">Address & Directions</FormLabel>
+                            <FormControl>
+                              <Textarea
+                                placeholder="Full street address, entrance instructions, load-in notes..."
+                                className="bg-background/50 border-border rounded-none min-h-[90px] focus-visible:ring-primary focus-visible:border-primary resize-none"
+                                {...field}
+                              />
                             </FormControl>
                             <FormMessage className="text-primary/80 text-xs" />
                           </FormItem>
@@ -252,6 +336,29 @@ export default function Booking() {
                     <motion.div variants={revealVariants}>
                       <FormField
                         control={form.control}
+                        name="downPayment"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-xs uppercase tracking-widest text-foreground/80">Down Payment *</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="e.g. $1,500 — 50% deposit required to confirm booking"
+                                className="bg-background/50 border-border rounded-none focus-visible:ring-primary focus-visible:border-primary"
+                                {...field}
+                              />
+                            </FormControl>
+                            <p className="text-[10px] tracking-[0.15em] uppercase text-muted-foreground/70 mt-1">
+                              A non-refundable deposit is required to lock in the date. Management will confirm the amount after reviewing your request.
+                            </p>
+                            <FormMessage className="text-primary/80 text-xs" />
+                          </FormItem>
+                        )}
+                      />
+                    </motion.div>
+
+                    <motion.div variants={revealVariants}>
+                      <FormField
+                        control={form.control}
                         name="details"
                         render={({ field }) => (
                           <FormItem>
@@ -269,9 +376,48 @@ export default function Booking() {
                       />
                     </motion.div>
 
-                    <motion.div variants={revealVariants} className="pt-6">
-                      <Button 
-                        type="submit" 
+                    <motion.div variants={revealVariants} className="space-y-1 pt-2">
+                      <p className="text-[10px] tracking-[0.25em] uppercase text-primary/70">The Waiver</p>
+                      <div className="h-px w-full bg-gradient-to-r from-primary/40 via-primary/10 to-transparent" />
+                    </motion.div>
+
+                    <motion.div variants={revealVariants}>
+                      <FormField
+                        control={form.control}
+                        name="waiverAccepted"
+                        render={({ field }) => (
+                          <FormItem className="border border-primary/30 bg-primary/[0.03] p-5 md:p-6 space-y-4">
+                            <div className="space-y-3 text-xs md:text-sm leading-relaxed text-foreground/80 font-light">
+                              <p className="uppercase tracking-[0.2em] text-primary text-[11px] font-medium">Booking terms & release</p>
+                              <p>
+                                <span className="text-primary/90">1. Equipment liability —</span> The client assumes full financial responsibility for any Association World DJ equipment that is damaged by water, spills, mishandling, or other damage while at the client's venue, and agrees to pay the full cost of repair or replacement.
+                              </p>
+                              <p>
+                                <span className="text-primary/90">2. Performance injury release —</span> The client releases Association World, its DJs, and artists from liability for any injuries sustained by performing artists at the client's venue or in the course of performance, and agrees to maintain a safe performance environment.
+                              </p>
+                            </div>
+                            <FormControl>
+                              <label className="flex items-start gap-3 cursor-pointer group pt-2 border-t border-primary/20">
+                                <input
+                                  type="checkbox"
+                                  checked={!!field.value}
+                                  onChange={(e) => field.onChange(e.target.checked)}
+                                  className="mt-1 h-4 w-4 accent-primary cursor-pointer shrink-0"
+                                />
+                                <span className="text-xs md:text-sm text-foreground/90 group-hover:text-primary transition-colors">
+                                  I have read and agree to the equipment liability and injury release terms above. *
+                                </span>
+                              </label>
+                            </FormControl>
+                            <FormMessage className="text-primary/80 text-xs" />
+                          </FormItem>
+                        )}
+                      />
+                    </motion.div>
+
+                    <motion.div variants={revealVariants} className="pt-4">
+                      <Button
+                        type="submit"
                         disabled={submitBooking.isPending}
                         className="w-full bg-primary hover:bg-primary/90 text-primary-foreground uppercase tracking-[0.2em] py-8 text-sm rounded-none shadow-[0_0_20px_rgba(201,169,97,0.2)] hover:shadow-[0_0_30px_rgba(201,169,97,0.4)] transition-all"
                       >

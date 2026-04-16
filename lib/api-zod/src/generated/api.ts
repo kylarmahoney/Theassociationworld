@@ -52,11 +52,21 @@ export const submitBookingBodyEventTypeMax = 100;
 
 export const submitBookingBodyEventDateMax = 100;
 
-export const submitBookingBodyEventLocationMax = 300;
+export const submitBookingBodyDurationMax = 100;
+
+export const submitBookingBodyCityMax = 120;
+
+export const submitBookingBodyCountryMax = 120;
+
+export const submitBookingBodyVenueNameMax = 200;
+
+export const submitBookingBodyVenueDirectionsMax = 1000;
 
 export const submitBookingBodyArtistMax = 100;
 
 export const submitBookingBodyBudgetMax = 100;
+
+export const submitBookingBodyDownPaymentMax = 100;
 
 export const submitBookingBodyDetailsMax = 5000;
 
@@ -66,10 +76,19 @@ export const SubmitBookingBody = zod.object({
   phone: zod.string().max(submitBookingBodyPhoneMax).optional(),
   eventType: zod.string().min(1).max(submitBookingBodyEventTypeMax),
   eventDate: zod.string().max(submitBookingBodyEventDateMax),
-  eventLocation: zod.string().min(1).max(submitBookingBodyEventLocationMax),
+  duration: zod.string().min(1).max(submitBookingBodyDurationMax),
+  city: zod.string().min(1).max(submitBookingBodyCityMax),
+  country: zod.string().min(1).max(submitBookingBodyCountryMax),
+  venueName: zod.string().min(1).max(submitBookingBodyVenueNameMax),
+  venueDirections: zod
+    .string()
+    .max(submitBookingBodyVenueDirectionsMax)
+    .optional(),
   artist: zod.string().min(1).max(submitBookingBodyArtistMax),
   budget: zod.string().max(submitBookingBodyBudgetMax).optional(),
+  downPayment: zod.string().min(1).max(submitBookingBodyDownPaymentMax),
   details: zod.string().max(submitBookingBodyDetailsMax).optional(),
+  waiverAccepted: zod.literal(true),
 });
 
 export const SubmitBookingResponse = zod.object({

@@ -25,9 +25,26 @@ export interface BookingSubmission {
   eventDate: string;
   /**
    * @minLength 1
-   * @maxLength 300
+   * @maxLength 100
    */
-  eventLocation: string;
+  duration: string;
+  /**
+   * @minLength 1
+   * @maxLength 120
+   */
+  city: string;
+  /**
+   * @minLength 1
+   * @maxLength 120
+   */
+  country: string;
+  /**
+   * @minLength 1
+   * @maxLength 200
+   */
+  venueName: string;
+  /** @maxLength 1000 */
+  venueDirections?: string;
   /**
    * @minLength 1
    * @maxLength 100
@@ -35,6 +52,12 @@ export interface BookingSubmission {
   artist: string;
   /** @maxLength 100 */
   budget?: string;
+  /**
+   * @minLength 1
+   * @maxLength 100
+   */
+  downPayment: string;
   /** @maxLength 5000 */
   details?: string;
+  waiverAccepted: boolean;
 }

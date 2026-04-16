@@ -144,10 +144,25 @@ components:
         eventDate:
           type: string
           maxLength: 100
-        eventLocation:
+        duration:
           type: string
           minLength: 1
-          maxLength: 300
+          maxLength: 100
+        city:
+          type: string
+          minLength: 1
+          maxLength: 120
+        country:
+          type: string
+          minLength: 1
+          maxLength: 120
+        venueName:
+          type: string
+          minLength: 1
+          maxLength: 200
+        venueDirections:
+          type: string
+          maxLength: 1000
         artist:
           type: string
           minLength: 1
@@ -155,16 +170,28 @@ components:
         budget:
           type: string
           maxLength: 100
+        downPayment:
+          type: string
+          minLength: 1
+          maxLength: 100
         details:
           type: string
           maxLength: 5000
+        waiverAccepted:
+          type: boolean
+          enum: [true]
       required:
         - name
         - email
         - eventType
         - eventDate
-        - eventLocation
+        - duration
+        - city
+        - country
+        - venueName
         - artist
+        - downPayment
+        - waiverAccepted
     SubmissionResult:
       type: object
       properties:
