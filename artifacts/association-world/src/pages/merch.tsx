@@ -3,10 +3,10 @@ import { PageLayout, revealVariants, staggerContainer } from "@/components/layou
 import { Button } from "@/components/ui/button";
 
 const products = [
-  { id: 1, name: "INITIATE HOODIE", price: "$185", image: "/merch/merch1.png", isExclusive: false },
-  { id: 2, name: "COVENANT TEE", price: "$85", image: "/merch/merch2.png", isExclusive: false },
-  { id: 3, name: "SILENCE CAP", price: "$65", image: "/merch/merch3.png", isExclusive: false },
-  { id: 4, name: "ARCHITECT HEAVY HOODIE", price: "$250", image: "/merch/merch4.png", isExclusive: true },
+  { id: 1, name: "SEAL HOODIE", price: "$185", logo: "/brand/logo-seal.png", logoClass: "w-2/3", isExclusive: false },
+  { id: 2, name: "SEAL TEE", price: "$85", logo: "/brand/logo-seal.png", logoClass: "w-1/2", isExclusive: false },
+  { id: 3, name: "MASCOT HOODIE", price: "$195", logo: "/brand/mascot.png", logoClass: "w-2/3", isExclusive: false },
+  { id: 4, name: "MASCOT TEE", price: "$90", logo: "/brand/mascot.png", logoClass: "w-1/2", isExclusive: true },
 ];
 
 export default function Merch() {
@@ -19,7 +19,7 @@ export default function Merch() {
               The Collection
             </motion.h1>
             <motion.p variants={revealVariants} className="text-muted-foreground tracking-[0.2em] text-sm md:text-base max-w-2xl mx-auto uppercase">
-              Uniforms for the initiated.
+              Uniforms for the initiated. Two marks. One covenant.
             </motion.p>
           </motion.div>
         </div>
@@ -37,23 +37,24 @@ export default function Merch() {
                 transition={{ duration: 0.6, delay: i * 0.1 }}
                 className="group cursor-pointer"
               >
-                <div className="relative aspect-square overflow-hidden bg-secondary border border-border/20 mb-6 group-hover:border-primary/30 transition-colors duration-500">
-                  <img 
-                    src={product.image} 
-                    alt={product.name} 
-                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100"
+                <div className="relative aspect-square overflow-hidden bg-secondary border border-border/20 mb-6 group-hover:border-primary/40 transition-colors duration-500 flex items-center justify-center">
+                  <div className="absolute inset-0 bg-gradient-to-b from-black via-zinc-950 to-black" />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(201,169,97,0.08),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                  <img
+                    src={product.logo}
+                    alt={product.name}
+                    className={`relative ${product.logoClass} object-contain opacity-80 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105 drop-shadow-[0_0_25px_rgba(201,169,97,0.25)] group-hover:drop-shadow-[0_0_45px_rgba(201,169,97,0.5)]`}
                   />
                   {product.isExclusive && (
-                    <div className="absolute inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center opacity-100 transition-opacity">
+                    <div className="absolute inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center">
                       <div className="text-center px-4">
                         <p className="text-primary font-serif uppercase tracking-widest text-lg drop-shadow-[0_0_10px_rgba(201,169,97,0.5)] mb-2">Members Only</p>
                         <p className="text-xs text-muted-foreground tracking-[0.2em] uppercase">Access required</p>
                       </div>
                     </div>
                   )}
-                  <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-500 pointer-events-none" />
                 </div>
-                
+
                 <div className="text-center space-y-2">
                   <h3 className="text-lg font-serif uppercase tracking-widest text-foreground group-hover:text-primary transition-colors">
                     {product.name}
@@ -65,8 +66,8 @@ export default function Merch() {
               </motion.div>
             ))}
           </div>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
