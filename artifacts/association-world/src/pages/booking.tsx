@@ -114,6 +114,91 @@ export default function Booking() {
                     <motion.div variants={revealVariants} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <FormField
                         control={form.control}
+                        name="talentType"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-xs uppercase tracking-widest text-foreground/80">Booking Type *</FormLabel>
+                            <Select
+                              onValueChange={(value) => {
+                                field.onChange(value);
+                                form.setValue("artist", "", { shouldValidate: false });
+                              }}
+                              value={field.value}
+                            >
+                              <FormControl>
+                                <SelectTrigger className="bg-background/50 border-border rounded-none focus:ring-primary">
+                                  <SelectValue placeholder="DJ or Artist" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent className="bg-card border-border rounded-none">
+                                <SelectItem value="DJ">DJ</SelectItem>
+                                <SelectItem value="Artist">Live Artist</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <FormMessage className="text-primary/80 text-xs" />
+                          </FormItem>
+                        )}
+                      />
+                      {talentType === "Artist" ? (
+                        <FormField
+                          key="artist-select"
+                          control={form.control}
+                          name="artist"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-xs uppercase tracking-widest text-foreground/80">Requested Artist *</FormLabel>
+                              <Select onValueChange={field.onChange} value={field.value}>
+                                <FormControl>
+                                  <SelectTrigger className="bg-background/50 border-border rounded-none focus:ring-primary">
+                                    <SelectValue placeholder="Select artist" />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent className="bg-card border-border rounded-none max-h-80">
+                                  <SelectItem value="No preference">No preference</SelectItem>
+                                  {artists.map((a) => (
+                                    <SelectItem key={a.id} value={a.name}>
+                                      {a.name}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                              <FormMessage className="text-primary/80 text-xs" />
+                            </FormItem>
+                          )}
+                        />
+                      ) : (
+                        <FormField
+                          key="dj-select"
+                          control={form.control}
+                          name="artist"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-xs uppercase tracking-widest text-foreground/80">Requested DJ *</FormLabel>
+                              <Select onValueChange={field.onChange} value={field.value}>
+                                <FormControl>
+                                  <SelectTrigger className="bg-background/50 border-border rounded-none focus:ring-primary">
+                                    <SelectValue placeholder="Select DJ" />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent className="bg-card border-border rounded-none max-h-80">
+                                  <SelectItem value="No preference">No preference</SelectItem>
+                                  {djs.map((dj) => (
+                                    <SelectItem key={dj.username} value={dj.stageName}>
+                                      {dj.stageName}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                              <FormMessage className="text-primary/80 text-xs" />
+                            </FormItem>
+                          )}
+                        />
+                      )}
+                    </motion.div>
+
+                    <motion.div variants={revealVariants} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <FormField
+                        control={form.control}
                         name="name"
                         render={({ field }) => (
                           <FormItem>
@@ -281,88 +366,6 @@ export default function Booking() {
                     </motion.div>
 
                     <motion.div variants={revealVariants} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <FormField
-                        control={form.control}
-                        name="talentType"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-xs uppercase tracking-widest text-foreground/80">Booking Type *</FormLabel>
-                            <Select
-                              onValueChange={(value) => {
-                                field.onChange(value);
-                                form.setValue("artist", "", { shouldValidate: false });
-                              }}
-                              value={field.value}
-                            >
-                              <FormControl>
-                                <SelectTrigger className="bg-background/50 border-border rounded-none focus:ring-primary">
-                                  <SelectValue placeholder="DJ or Artist" />
-                                </SelectTrigger>
-                              </FormControl>
-                              <SelectContent className="bg-card border-border rounded-none">
-                                <SelectItem value="DJ">DJ</SelectItem>
-                                <SelectItem value="Artist">Live Artist</SelectItem>
-                              </SelectContent>
-                            </Select>
-                            <FormMessage className="text-primary/80 text-xs" />
-                          </FormItem>
-                        )}
-                      />
-                      {talentType === "Artist" ? (
-                        <FormField
-                          key="artist-select"
-                          control={form.control}
-                          name="artist"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel className="text-xs uppercase tracking-widest text-foreground/80">Requested Artist *</FormLabel>
-                              <Select onValueChange={field.onChange} value={field.value}>
-                                <FormControl>
-                                  <SelectTrigger className="bg-background/50 border-border rounded-none focus:ring-primary">
-                                    <SelectValue placeholder="Select artist" />
-                                  </SelectTrigger>
-                                </FormControl>
-                                <SelectContent className="bg-card border-border rounded-none max-h-80">
-                                  <SelectItem value="No preference">No preference</SelectItem>
-                                  {artists.map((a) => (
-                                    <SelectItem key={a.id} value={a.name}>
-                                      {a.name}
-                                    </SelectItem>
-                                  ))}
-                                </SelectContent>
-                              </Select>
-                              <FormMessage className="text-primary/80 text-xs" />
-                            </FormItem>
-                          )}
-                        />
-                      ) : (
-                        <FormField
-                          key="dj-select"
-                          control={form.control}
-                          name="artist"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel className="text-xs uppercase tracking-widest text-foreground/80">Requested DJ *</FormLabel>
-                              <Select onValueChange={field.onChange} value={field.value}>
-                                <FormControl>
-                                  <SelectTrigger className="bg-background/50 border-border rounded-none focus:ring-primary">
-                                    <SelectValue placeholder="Select DJ" />
-                                  </SelectTrigger>
-                                </FormControl>
-                                <SelectContent className="bg-card border-border rounded-none max-h-80">
-                                  <SelectItem value="No preference">No preference</SelectItem>
-                                  {djs.map((dj) => (
-                                    <SelectItem key={dj.username} value={dj.stageName}>
-                                      {dj.stageName}
-                                    </SelectItem>
-                                  ))}
-                                </SelectContent>
-                              </Select>
-                              <FormMessage className="text-primary/80 text-xs" />
-                            </FormItem>
-                          )}
-                        />
-                      )}
                       <FormField
                         control={form.control}
                         name="budget"
