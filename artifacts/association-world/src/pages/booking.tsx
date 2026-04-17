@@ -204,7 +204,7 @@ export default function Booking() {
                           <FormItem>
                             <FormLabel className="text-xs uppercase tracking-widest text-foreground/80">Full Name *</FormLabel>
                             <FormControl>
-                              <Input placeholder="Client Name" className="bg-background/50 border-border rounded-none focus-visible:ring-primary focus-visible:border-primary" {...field} />
+                              <Input placeholder="Your Full Name" className="bg-background/50 border-border rounded-none focus-visible:ring-primary focus-visible:border-primary" {...field} />
                             </FormControl>
                             <FormMessage className="text-primary/80 text-xs" />
                           </FormItem>
