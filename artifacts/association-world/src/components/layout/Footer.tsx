@@ -7,7 +7,6 @@ export function Footer() {
     <footer className="bg-background border-t border-border/30 pt-24 pb-12 relative overflow-hidden">
       {/* Decorative gradient blur */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-64 bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
-
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         <div className="flex flex-col items-center text-center space-y-12">
           {/* Logo & Tagline */}
@@ -22,9 +21,7 @@ export function Footer() {
             <h2 className="font-serif text-3xl md:text-4xl text-foreground tracking-[0.2em] uppercase">
               Association <span className="text-primary">World</span>
             </h2>
-            <p className="text-muted-foreground tracking-[0.3em] text-xs uppercase">
-              Loyalty. Silence. Unity.
-            </p>
+            <p className="text-muted-foreground tracking-[0.3em] text-xs uppercase">Loyalty. rESPECT. Silence. Unity.</p>
           </div>
 
           {/* Links */}
