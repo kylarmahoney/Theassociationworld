@@ -78,8 +78,7 @@ export default function Home() {
                 <h1 className="text-5xl md:text-7xl lg:text-9xl font-serif text-transparent bg-clip-text bg-gradient-to-b from-[#f5e6b8] via-[#c9a961] to-[#8a6f2e] tracking-[0.1em] drop-shadow-[0_0_40px_rgba(201,169,97,0.6)]">
                   ASSOCIATION WORLD
                 </h1>
-                <p className="text-primary tracking-[0.3em] md:tracking-[0.5em] text-sm md:text-base uppercase font-medium">Loyalty. RESPECT. Silence. Unity.
-                - HADRIAN</p>
+                <p className="text-primary tracking-[0.3em] md:tracking-[0.5em] text-sm md:text-base uppercase font-medium">Loyalty. RESPECT. Silence. Unity.</p>
               </motion.div>
               
               <motion.div variants={revealVariants} className="max-w-2xl text-muted-foreground/80 leading-relaxed font-light">
