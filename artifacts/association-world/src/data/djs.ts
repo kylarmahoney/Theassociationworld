@@ -11,9 +11,15 @@ export const fallbackPortraits = ["/djs/dj1.png", "/djs/dj2.png", "/djs/dj3.png"
 type RosterEntry = Omit<DJ, "image"> & { image?: string };
 
 const roster: RosterEntry[] = [
+  { stageName: "DJ Nonstopp", username: "@djnonstopp", subtitle: "DJ", image: "/djs/djnonstopp.jpg", instagram: "https://instagram.com/djnonstopp" },
+  { stageName: "DJ ANARCHY", username: "@djanarchyrmx", subtitle: "Open Format DJ", image: "/djs/djanarchyrmx.jpg", instagram: "https://instagram.com/djanarchyrmx" },
+  { stageName: "DJ Fat Candy", username: "@esdras53st", subtitle: "DJ", image: "/djs/esdras53st.jpg", instagram: "https://instagram.com/esdras53st" },
+  { stageName: "Kevin Banks", username: "@kvnbnks", subtitle: "Artist / DJ", image: "/djs/kvnbnks.jpg", instagram: "https://instagram.com/kvnbnks" },
+  { stageName: "DJ Ex", username: "@iamdjex", subtitle: "Producer / DJ / Creative Director", image: "/djs/iamdjex.jpg", instagram: "https://instagram.com/iamdjex" },
+  { stageName: "Jacob Andrew", username: "@_jacobandrew", subtitle: "Artist / Producer", image: "/djs/_jacobandrew.jpg", instagram: "https://instagram.com/_jacobandrew" },
+  { stageName: "Tony Bangz", username: "@djtonybangz", subtitle: "Resident DJ", image: "/djs/djtonybangz.jpg", instagram: "https://instagram.com/djtonybangz" },
   { stageName: "Cid Ray", username: "@djcidray", subtitle: "DJ", image: "/djs/djcidray.jpg", instagram: "https://instagram.com/djcidray" },
   { stageName: "DJ Zitro", username: "@djzitro_", subtitle: "DJ", image: "/djs/djzitro.jpg", instagram: "https://instagram.com/djzitro_" },
-  { stageName: "DJ Nonstopp", username: "@djnonstopp", subtitle: "DJ", image: "/djs/djnonstopp.jpg", instagram: "https://instagram.com/djnonstopp" },
   { stageName: "DJ Kid Kreo", username: "@djkidkreo", subtitle: "DJ", image: "/djs/djkidkreo.jpg", instagram: "https://instagram.com/djkidkreo" },
   { stageName: "DJ NickyZ", username: "@infamousnickyz", subtitle: "DJ", image: "/djs/infamousnickyz.jpg", instagram: "https://instagram.com/infamousnickyz" },
   { stageName: "Go DJ Jemini", username: "@godjjemini", subtitle: "DJ", image: "/djs/godjjemini.jpg", instagram: "https://instagram.com/godjjemini" },
@@ -22,12 +28,6 @@ const roster: RosterEntry[] = [
   { stageName: "StandMan409", username: "@djstandman409", subtitle: "DJ", image: "/djs/djstandman409.jpg", instagram: "https://instagram.com/djstandman409" },
   { stageName: "WKD", username: "@djwkd23", subtitle: "DJ", image: "/djs/djwkd23.jpg", instagram: "https://instagram.com/djwkd23" },
   { stageName: "RNZO DTX", username: "@djrnzodtx", subtitle: "DJ", image: "/djs/djrnzodtx.jpg", instagram: "https://instagram.com/djrnzodtx" },
-  { stageName: "Kevin Banks", username: "@kvnbnks", subtitle: "Artist / DJ", image: "/djs/kvnbnks.jpg", instagram: "https://instagram.com/kvnbnks" },
-  { stageName: "Jacob Andrew", username: "@_jacobandrew", subtitle: "Artist / Producer", image: "/djs/_jacobandrew.jpg", instagram: "https://instagram.com/_jacobandrew" },
-  { stageName: "DJ ANARCHY", username: "@djanarchyrmx", subtitle: "Open Format DJ", image: "/djs/djanarchyrmx.jpg", instagram: "https://instagram.com/djanarchyrmx" },
-  { stageName: "Tony Bangz", username: "@djtonybangz", subtitle: "Resident DJ", image: "/djs/djtonybangz.jpg", instagram: "https://instagram.com/djtonybangz" },
-  { stageName: "DJ Ex", username: "@iamdjex", subtitle: "Producer / DJ / Creative Director", image: "/djs/iamdjex.jpg", instagram: "https://instagram.com/iamdjex" },
-  { stageName: "DJ Fat Candy", username: "@esdras53st", subtitle: "DJ", image: "/djs/esdras53st.jpg", instagram: "https://instagram.com/esdras53st" },
 ];
 
 export const djs: DJ[] = roster.map((dj, i) => ({
