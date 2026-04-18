@@ -60,9 +60,11 @@ export default function Artists() {
 
                   {/* Text content */}
                   <div className="absolute inset-0 p-8 flex flex-col justify-end z-20">
-                    <h2 className="text-2xl lg:text-3xl font-serif text-primary uppercase tracking-widest mb-2 drop-shadow-[0_0_10px_rgba(201,169,97,0.5)]">
-                      {artist.name}
-                    </h2>
+                    <Link href={`/artists/${artist.slug}`}>
+                      <h2 className="text-2xl lg:text-3xl font-serif text-primary uppercase tracking-widest mb-2 drop-shadow-[0_0_10px_rgba(201,169,97,0.5)] cursor-pointer hover:text-primary/80 transition-colors">
+                        {artist.name}
+                      </h2>
+                    </Link>
                     <p className="text-xs tracking-[0.2em] text-foreground/80 uppercase mb-3">
                       {artist.discipline}
                     </p>

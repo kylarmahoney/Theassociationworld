@@ -7,6 +7,7 @@
  */
 
 export * from "./bookingSubmission";
+export * from "./bookingSubmissionTalentType";
 export * from "./contactSubmission";
 export * from "./errorResponse";
 export * from "./healthStatus";

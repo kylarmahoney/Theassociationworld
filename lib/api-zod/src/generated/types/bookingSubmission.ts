@@ -5,6 +5,7 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+import type { BookingSubmissionTalentType } from "./bookingSubmissionTalentType";
 
 export interface BookingSubmission {
   /**
@@ -23,11 +24,8 @@ export interface BookingSubmission {
   eventType: string;
   /** @maxLength 100 */
   eventDate: string;
-  /**
-   * @minLength 1
-   * @maxLength 100
-   */
-  duration: string;
+  /** @maxLength 100 */
+  duration?: string;
   /**
    * @minLength 1
    * @maxLength 120
@@ -45,19 +43,20 @@ export interface BookingSubmission {
   venueName: string;
   /** @maxLength 1000 */
   venueDirections?: string;
+  talentType: BookingSubmissionTalentType;
   /**
    * @minLength 1
    * @maxLength 100
    */
   artist: string;
+  /** @maxLength 50 */
+  hours?: string;
+  bringSpeakers?: boolean;
   /** @maxLength 100 */
   budget?: string;
-  /**
-   * @minLength 1
-   * @maxLength 100
-   */
-  downPayment: string;
+  /** @maxLength 100 */
+  downPayment?: string;
   /** @maxLength 5000 */
   details?: string;
-  waiverAccepted: boolean;
+  waiverAccepted?: boolean;
 }

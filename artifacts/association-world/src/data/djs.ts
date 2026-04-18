@@ -4,11 +4,14 @@ export type DJ = {
   subtitle: string;
   image: string;
   instagram: string;
+  slug: string;
 };
+
+export const toSlug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 export const fallbackPortraits = ["/djs/dj1.png", "/djs/dj2.png", "/djs/dj3.png", "/djs/dj4.png", "/djs/dj5.png", "/djs/dj6.png"];
 
-type RosterEntry = Omit<DJ, "image"> & { image?: string };
+type RosterEntry = Omit<DJ, "image" | "slug"> & { image?: string };
 
 const roster: RosterEntry[] = [
   { stageName: "DJ Nonstopp", username: "@djnonstopp", subtitle: "DJ", image: "/djs/djnonstopp.jpg", instagram: "https://instagram.com/djnonstopp" },
@@ -33,7 +36,10 @@ const roster: RosterEntry[] = [
 export const djs: DJ[] = roster.map((dj, i) => ({
   ...dj,
   image: dj.image ?? fallbackPortraits[i % fallbackPortraits.length],
+  slug: toSlug(dj.stageName),
 }));
+
+export const findDjBySlug = (slug: string) => djs.find((d) => d.slug === slug);
 
 export function handleDjImgError(e: React.SyntheticEvent<HTMLImageElement>, index: number) {
   const img = e.currentTarget;

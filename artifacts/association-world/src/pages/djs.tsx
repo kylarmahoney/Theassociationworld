@@ -98,9 +98,11 @@ export default function DJs() {
 
                   {/* Meta below frame */}
                   <div className="pt-6 space-y-2 text-center">
-                    <h2 className="font-serif text-xl md:text-2xl uppercase tracking-[0.15em] text-foreground group-hover:text-primary transition-colors duration-500">
-                      {dj.stageName}
-                    </h2>
+                    <Link href={`/djs/${dj.slug}`}>
+                      <h2 className="font-serif text-xl md:text-2xl uppercase tracking-[0.15em] text-foreground group-hover:text-primary transition-colors duration-500 cursor-pointer hover:text-primary">
+                        {dj.stageName}
+                      </h2>
+                    </Link>
                     <div className="mx-auto h-px w-8 bg-primary/40 group-hover:w-16 group-hover:bg-primary transition-all duration-500" />
                     <p className="text-[10px] tracking-[0.3em] text-muted-foreground/80 uppercase">
                       {dj.subtitle}

@@ -7,7 +7,9 @@ import NotFound from "@/pages/not-found";
 
 import Home from "@/pages/home";
 import DJs from "@/pages/djs";
+import DJDetail from "@/pages/dj-detail";
 import Artists from "@/pages/artists";
+import ArtistDetail from "@/pages/artist-detail";
 import Booking from "@/pages/booking";
 import Merch from "@/pages/merch";
 import Contact from "@/pages/contact";
@@ -19,7 +21,9 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/djs" component={DJs} />
+      <Route path="/djs/:slug" component={DJDetail} />
       <Route path="/artists" component={Artists} />
+      <Route path="/artists/:slug" component={ArtistDetail} />
       <Route path="/booking" component={Booking} />
       <Route path="/merch" component={Merch} />
       <Route path="/contact" component={Contact} />

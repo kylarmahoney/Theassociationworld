@@ -146,7 +146,6 @@ components:
           maxLength: 100
         duration:
           type: string
-          minLength: 1
           maxLength: 100
         city:
           type: string
@@ -163,35 +162,39 @@ components:
         venueDirections:
           type: string
           maxLength: 1000
+        talentType:
+          type: string
+          enum: [DJ, Artist]
         artist:
           type: string
           minLength: 1
           maxLength: 100
+        hours:
+          type: string
+          maxLength: 50
+        bringSpeakers:
+          type: boolean
         budget:
           type: string
           maxLength: 100
         downPayment:
           type: string
-          minLength: 1
           maxLength: 100
         details:
           type: string
           maxLength: 5000
         waiverAccepted:
           type: boolean
-          enum: [true]
       required:
         - name
         - email
         - eventType
         - eventDate
-        - duration
         - city
         - country
         - venueName
+        - talentType
         - artist
-        - downPayment
-        - waiverAccepted
     SubmissionResult:
       type: object
       properties:
