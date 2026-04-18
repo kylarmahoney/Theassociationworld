@@ -19,7 +19,7 @@ export function Footer() {
               />
             </div>
             <h2 className="font-serif text-3xl md:text-4xl text-foreground tracking-[0.2em] uppercase">
-              Association <span className="text-primary">World</span>
+              <span className="text-primary">Association World</span>
             </h2>
             <p className="text-muted-foreground tracking-[0.3em] text-xs uppercase">Loyalty. rESPECT. Silence. Unity.</p>
           </div>

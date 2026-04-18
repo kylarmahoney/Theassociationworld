@@ -109,12 +109,12 @@ export default function Home() {
               <motion.div 
                 initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
                 variants={staggerContainer}
-                className="space-y-8"
+                className="space-y-8 text-center md:text-left flex flex-col items-center md:items-start"
               >
                 <motion.h2 variants={revealVariants} className="text-3xl md:text-5xl font-serif text-primary uppercase tracking-[0.1em]">
                   The Ethos
                 </motion.h2>
-                <motion.div variants={revealVariants} className="h-px w-24 bg-gradient-to-r from-primary to-transparent" />
+                <motion.div variants={revealVariants} className="h-px w-24 bg-gradient-to-r from-transparent via-primary to-transparent md:from-primary md:via-primary md:to-transparent" />
                 <motion.p variants={revealVariants} className="text-lg md:text-xl text-foreground/80 leading-relaxed font-light">
                   Behind unmarked doors and velvet ropes, a covenant of artists and architects of the night operates in silence. We do not seek the spotlight; we control it.
                 </motion.p>
