@@ -18,7 +18,7 @@ export default function ArtistDetail() {
       <section className="pt-32 pb-24 relative overflow-hidden min-h-screen">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(201,169,97,0.08),transparent_60%)] pointer-events-none" />
         <div className="container px-6 md:px-12 mx-auto max-w-6xl relative z-10">
-          <Link href="/artists" className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-primary/70 hover:text-primary transition-colors mb-10">
+          <Link href="/artists" className="fixed top-24 left-4 md:left-8 z-40 inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-primary/80 hover:text-primary transition-colors bg-background/70 backdrop-blur-sm border border-primary/30 px-4 py-2 rounded-sm shadow-[0_0_20px_rgba(0,0,0,0.6)]">
             <ArrowLeft size={14} /> Back to Artists
           </Link>
 

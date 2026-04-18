@@ -59,9 +59,6 @@ const bookingSchema = z
 
 type BookingFormValues = z.infer<typeof bookingSchema>;
 
-const DJ_BASE_RATE = 75;
-const WEEKEND_SURCHARGE = 0.2;
-const SPEAKER_FEE = 150;
 
 function isWeekendDate(value: string): boolean {
   if (!value) return false;
@@ -112,15 +109,15 @@ export default function Booking() {
   const isDj = talentType === "DJ";
   const isWeekend = isWeekendDate(eventDate);
 
-  const estimate = useMemo(() => {
-    const h = parseFloat(hoursStr);
-    if (!isDj || !h || h <= 0) return null;
-    const base = DJ_BASE_RATE * h;
-    const surcharge = isWeekend ? base * WEEKEND_SURCHARGE : 0;
-    const speakers = bringSpeakers ? SPEAKER_FEE : 0;
-    const total = base + surcharge + speakers;
-    return { base, surcharge, speakers, total, h };
-  }, [hoursStr, isDj, isWeekend, bringSpeakers]);
+  const isLastMinute = useMemo(() => {
+    if (!eventDate) return false;
+    const ev = new Date(eventDate);
+    if (isNaN(ev.getTime())) return false;
+    const diffDays = (ev.getTime() - Date.now()) / (1000 * 60 * 60 * 24);
+    return diffDays >= 0 && diffDays < 14;
+  }, [eventDate]);
+
+  const showPricingNote = isDj && (isWeekend || isLastMinute || bringSpeakers || hoursStr.length > 0);
 
   const onSubmit = (data: BookingFormValues) => {
     submitBooking.mutate({ data }, {
@@ -375,7 +372,7 @@ export default function Booking() {
                                   />
                                 </FormControl>
                                 <p className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground/70 mt-1">
-                                  Starts at $75 / hour
+                                  Final price negotiated · 50% deposit required
                                 </p>
                                 <FormMessage className="text-primary/80 text-xs" />
                               </FormItem>
@@ -406,24 +403,27 @@ export default function Booking() {
                           />
                         </motion.div>
 
-                        {estimate && (
+                        {showPricingNote && (
                           <motion.div
                             variants={revealVariants}
                             className="border border-primary/40 bg-primary/[0.04] p-5 space-y-2 text-sm font-light"
                           >
-                            <div className="text-[10px] tracking-[0.3em] uppercase text-primary/70 mb-2">Estimated Total</div>
-                            <div className="flex justify-between"><span>Base ({estimate.h} hr × $75)</span><span>${estimate.base.toFixed(2)}</span></div>
-                            {estimate.surcharge > 0 && (
-                              <div className="flex justify-between text-primary/80"><span>Weekend surcharge (+20%)</span><span>+${estimate.surcharge.toFixed(2)}</span></div>
-                            )}
-                            {estimate.speakers > 0 && (
-                              <div className="flex justify-between text-primary/80"><span>Speaker rig</span><span>+${estimate.speakers.toFixed(2)}</span></div>
-                            )}
-                            <div className="h-px bg-primary/20 my-2" />
-                            <div className="flex justify-between text-primary text-base"><span className="uppercase tracking-[0.2em] text-xs">Estimated</span><span className="font-serif">${estimate.total.toFixed(2)}</span></div>
-                            <p className="text-[10px] tracking-[0.15em] uppercase text-muted-foreground/70 pt-2">
-                              Estimate only. Final quote and travel costs confirmed by management.
+                            <div className="text-[10px] tracking-[0.3em] uppercase text-primary/70 mb-2">Pricing Notes</div>
+                            <p className="text-foreground/80">
+                              Final price is negotiated directly with management once we review your request.
+                              A 50% deposit is required to confirm the booking.
                             </p>
+                            {isWeekend && (
+                              <p className="text-primary/80">Weekend (Fri–Sun) date selected — premium pricing applies.</p>
+                            )}
+                            {bringSpeakers && (
+                              <p className="text-primary/80">Speaker rig requested — additional fee included in final quote.</p>
+                            )}
+                            {isLastMinute && (
+                              <p className="text-primary/80">
+                                Last-minute booking (within 14 days) — may include additional costs and fees.
+                              </p>
+                            )}
                           </motion.div>
                         )}
                       </>

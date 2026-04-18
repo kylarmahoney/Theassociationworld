@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
+import { useLocation } from "wouter";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 
@@ -11,6 +12,10 @@ interface PageLayoutProps {
 }
 
 export function PageLayout({ children, className = "", hideNav = false, hideFooter = false }: PageLayoutProps) {
+  const [location] = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [location]);
   return (
     <div className={`min-h-screen flex flex-col bg-background text-foreground ${className}`}>
       {!hideNav && <Navbar />}
