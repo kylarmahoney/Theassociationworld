@@ -140,8 +140,7 @@ export default function Home() {
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}
               className="flex flex-col items-center text-center space-y-6"
             >
-              <motion.h2 variants={revealVariants} className="text-3xl md:text-5xl font-serif uppercase tracking-[0.1em]">The Roster OF DJS
-</motion.h2>
+              <motion.h2 variants={revealVariants} className="text-3xl md:text-5xl font-serif uppercase tracking-[0.1em] text-transparent bg-clip-text bg-gradient-to-b from-[#f5e6b8] via-[#c9a961] to-[#8a6f2e] drop-shadow-[0_0_30px_rgba(201,169,97,0.3)]">The Roster of DJs</motion.h2>
               <motion.div variants={revealVariants} className="h-px w-24 bg-gradient-to-r from-transparent via-primary to-transparent" />
             </motion.div>
 
