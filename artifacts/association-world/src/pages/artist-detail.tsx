@@ -53,9 +53,11 @@ export default function ArtistDetail() {
               </p>
 
               <div className="space-y-3 pt-4">
-                <div className="text-[10px] tracking-[0.3em] uppercase text-primary/60">How Booking Works</div>
+                <div className="text-[10px] tracking-[0.3em] uppercase text-primary/60">Booking Terms</div>
                 <div className="border border-border/50 bg-card/30 backdrop-blur-sm p-5 space-y-2 text-sm font-light">
-                  <p>Send us a message describing your event. Our management will personally call or email you with what we can offer for this artist — no public rate card.</p>
+                  <p><span className="text-primary/80">Pricing:</span> Negotiated per event with management.</p>
+                  <p><span className="text-primary/80">Deposit:</span> 50% required to confirm the booking.</p>
+                  <p><span className="text-primary/80">Last-minute bookings:</span> may include additional costs and fees.</p>
                 </div>
               </div>
 
