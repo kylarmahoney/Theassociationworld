@@ -32,6 +32,7 @@ const roster: RosterEntry[] = [
   { stageName: "WKD", username: "@djwkd23", subtitle: "DJ", image: "/djs/djwkd23.jpg", instagram: "https://instagram.com/djwkd23" },
   { stageName: "RNZO DTX", username: "@djrnzodtx", subtitle: "DJ", image: "/djs/djrnzodtx.jpg", instagram: "https://instagram.com/djrnzodtx" },
   { stageName: "Skritchin", username: "@skritchin", subtitle: "DJ", image: "/djs/skritchin.jpg", instagram: "https://instagram.com/skritchin" },
+  { stageName: "Bryan Rhymez", username: "@bryanrhymez", subtitle: "DJ", image: "/djs/bryanrhymez.jpg", instagram: "https://instagram.com/bryanrhymez" },
 ];
 
 export const djs: DJ[] = roster.map((dj, i) => ({
