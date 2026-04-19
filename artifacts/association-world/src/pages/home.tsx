@@ -132,7 +132,7 @@ export default function Home() {
                 className="group w-full flex items-center justify-between gap-6 py-8 md:py-10 text-left"
               >
                 <span className="font-serif text-3xl md:text-5xl uppercase tracking-[0.12em] text-transparent bg-clip-text bg-gradient-to-b from-[#f5e6b8] via-[#c9a961] to-[#8a6f2e] drop-shadow-[0_0_30px_rgba(201,169,97,0.3)]">
-                  The Roster of DJs
+                  Roster of DJs
                 </span>
                 <motion.span
                   animate={{ rotate: djsOpen ? 180 : 0 }}
