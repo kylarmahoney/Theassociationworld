@@ -20,7 +20,7 @@ export default function DJs() {
               variants={revealVariants}
               className="text-5xl md:text-7xl lg:text-8xl font-serif uppercase tracking-[0.12em] text-transparent bg-clip-text bg-gradient-to-b from-[#f5e6b8] via-[#c9a961] to-[#8a6f2e] drop-shadow-[0_0_40px_rgba(201,169,97,0.35)]"
             >
-              The DJ Roster
+              Roster of DJs
             </motion.h1>
             <motion.div variants={revealVariants} className="h-px w-32 mx-auto bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
             <motion.p variants={revealVariants} className="text-muted-foreground/90 tracking-[0.25em] text-xs md:text-sm max-w-xl mx-auto uppercase font-light">
