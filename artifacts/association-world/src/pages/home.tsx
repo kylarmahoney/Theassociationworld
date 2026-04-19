@@ -3,15 +3,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { PageLayout, revealVariants, staggerContainer } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { Instagram } from "lucide-react";
-import { djs, handleDjImgError } from "@/data/djs";
-
-const ROSTER_SIZE = 3;
-const ROTATE_MS = 5000;
+import { djs } from "@/data/djs";
+import { artists } from "@/data/artists";
 
 export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
-  const [rosterStart, setRosterStart] = useState(0);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -19,18 +15,6 @@ export default function Home() {
     }, 2500);
     return () => clearTimeout(timer);
   }, []);
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setRosterStart((prev) => (prev + ROSTER_SIZE) % djs.length);
-    }, ROTATE_MS);
-    return () => clearInterval(id);
-  }, []);
-
-  const featured = Array.from({ length: ROSTER_SIZE }, (_, k) => {
-    const idx = (rosterStart + k) % djs.length;
-    return { dj: djs[idx], idx };
-  });
 
   return (
     <>
@@ -133,85 +117,92 @@ export default function Home() {
           </div>
         </section>
 
-        {/* FEATURED DJS SECTION */}
-        <section className="py-32 bg-[#050505] relative">
-          <div className="container px-6 md:px-12 mx-auto space-y-16">
-            <motion.div 
+        {/* DJ ROSTER (text-only) */}
+        <section className="py-28 bg-[#050505] relative">
+          <div className="container px-6 md:px-12 mx-auto max-w-3xl space-y-12">
+            <motion.div
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}
               className="flex flex-col items-center text-center space-y-6"
             >
               <motion.h2 variants={revealVariants} className="text-3xl md:text-5xl font-serif uppercase tracking-[0.1em] text-transparent bg-clip-text bg-gradient-to-b from-[#f5e6b8] via-[#c9a961] to-[#8a6f2e] drop-shadow-[0_0_30px_rgba(201,169,97,0.3)]">The Roster of DJs</motion.h2>
               <motion.div variants={revealVariants} className="h-px w-24 bg-gradient-to-r from-transparent via-primary to-transparent" />
+              <motion.p variants={revealVariants} className="text-[10px] tracking-[0.35em] uppercase text-muted-foreground/70">
+                Tap a name to view the artist
+              </motion.p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 min-h-[480px]">
-              <AnimatePresence mode="popLayout">
-                {featured.map(({ dj, idx }, i) => (
-                  <motion.div
-                    key={`${rosterStart}-${dj.username}`}
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.8, delay: i * 0.12 }}
-                    className="group relative aspect-[3/4] overflow-hidden rounded-sm bg-background border border-border/50 hover:border-primary/50 transition-colors duration-500 shadow-[0_25px_60px_-20px_rgba(0,0,0,0.8)] hover:shadow-[0_35px_80px_-20px_rgba(201,169,97,0.35)]"
+            <motion.ul
+              initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}
+              variants={staggerContainer}
+              className="divide-y divide-border/30 border-y border-border/30"
+            >
+              {djs.map((dj) => (
+                <motion.li key={dj.username} variants={revealVariants}>
+                  <Link
+                    href={`/djs/${dj.slug}`}
+                    className="group flex items-center justify-between gap-6 py-5 md:py-6"
                   >
-                    <img
-                      src={dj.image}
-                      alt={dj.stageName}
-                      loading="lazy"
-                      onError={(e) => handleDjImgError(e, idx)}
-                      className="w-full h-full object-cover transition-all duration-[1200ms] ease-out filter grayscale contrast-110 brightness-90 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105 opacity-90"
-                    />
-                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.7)_100%)] pointer-events-none" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+                    <span className="font-serif text-xl md:text-3xl uppercase tracking-[0.15em] text-foreground group-hover:text-primary transition-colors">
+                      {dj.stageName}
+                    </span>
+                    <span className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground/60 group-hover:text-primary/80 transition-colors">
+                      View →
+                    </span>
+                  </Link>
+                </motion.li>
+              ))}
+            </motion.ul>
 
-                    <a
-                      href={dj.instagram}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${dj.stageName} on Instagram`}
-                      className="absolute top-5 right-5 w-8 h-8 rounded-full border border-primary/30 flex items-center justify-center text-primary/70 hover:text-primary hover:border-primary hover:bg-primary/10 transition-all duration-500 opacity-0 group-hover:opacity-100 backdrop-blur-sm z-20"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <Instagram size={14} />
-                    </a>
-
-                    <div className="absolute bottom-0 left-0 right-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                      <h3 className="text-2xl font-serif uppercase tracking-widest text-primary mb-2 drop-shadow-[0_0_10px_rgba(201,169,97,0.4)]">
-                        {dj.stageName}
-                      </h3>
-                      <div className="h-px w-10 bg-primary/60 mb-3 group-hover:w-20 transition-all duration-500" />
-                      <p className="text-[10px] tracking-[0.3em] text-foreground/70 uppercase mb-1">
-                        {dj.subtitle}
-                      </p>
-                      <p className="text-[11px] tracking-[0.2em] text-primary/70 font-light opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                        {dj.username}
-                      </p>
-                    </div>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </div>
-
-            {/* Pagination dots */}
-            <div className="flex justify-center gap-2 pt-4">
-              {Array.from({ length: Math.ceil(djs.length / ROSTER_SIZE) }).map((_, i) => {
-                const isActive = Math.floor(rosterStart / ROSTER_SIZE) === i;
-                return (
-                  <button
-                    key={i}
-                    onClick={() => setRosterStart(i * ROSTER_SIZE)}
-                    aria-label={`Show roster group ${i + 1}`}
-                    className={`h-px transition-all duration-500 ${isActive ? "w-10 bg-primary" : "w-6 bg-primary/20 hover:bg-primary/40"}`}
-                  />
-                );
-              })}
-            </div>
-
-            <div className="flex justify-center pt-8">
+            <div className="flex justify-center pt-4">
               <Link href="/djs">
                 <Button variant="outline" className="border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground tracking-widest uppercase rounded-none px-8">
-                  View Full Roster
+                  Open Full Roster
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ARTISTS (text-only) */}
+        <section className="py-28 bg-background relative border-t border-border/30">
+          <div className="container px-6 md:px-12 mx-auto max-w-3xl space-y-12">
+            <motion.div
+              initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}
+              className="flex flex-col items-center text-center space-y-6"
+            >
+              <motion.h2 variants={revealVariants} className="text-3xl md:text-5xl font-serif uppercase tracking-[0.1em] text-transparent bg-clip-text bg-gradient-to-b from-[#f5e6b8] via-[#c9a961] to-[#8a6f2e] drop-shadow-[0_0_30px_rgba(201,169,97,0.3)]">The Artists</motion.h2>
+              <motion.div variants={revealVariants} className="h-px w-24 bg-gradient-to-r from-transparent via-primary to-transparent" />
+              <motion.p variants={revealVariants} className="text-[10px] tracking-[0.35em] uppercase text-muted-foreground/70">
+                Tap a name to view the artist
+              </motion.p>
+            </motion.div>
+
+            <motion.ul
+              initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}
+              variants={staggerContainer}
+              className="divide-y divide-border/30 border-y border-border/30"
+            >
+              {artists.map((artist) => (
+                <motion.li key={artist.id} variants={revealVariants}>
+                  <Link
+                    href={`/artists/${artist.slug}`}
+                    className="group flex items-center justify-between gap-6 py-5 md:py-6"
+                  >
+                    <span className="font-serif text-xl md:text-3xl uppercase tracking-[0.15em] text-foreground group-hover:text-primary transition-colors">
+                      {artist.name}
+                    </span>
+                    <span className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground/60 group-hover:text-primary/80 transition-colors">
+                      View →
+                    </span>
+                  </Link>
+                </motion.li>
+              ))}
+            </motion.ul>
+
+            <div className="flex justify-center pt-4">
+              <Link href="/artists">
+                <Button variant="outline" className="border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground tracking-widest uppercase rounded-none px-8">
+                  Open Full Artists
                 </Button>
               </Link>
             </div>
