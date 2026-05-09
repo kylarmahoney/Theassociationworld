@@ -46,4 +46,4 @@ externalPort = 4200
 [userenv]
 
 [userenv.shared]
-RESEND_FROM_EMAIL = "Association World <no-reply@associationworld.com>"
+RESEND_FROM_EMAIL = "Association World <management@theassociationworld.com>"
