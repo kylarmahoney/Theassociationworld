@@ -1,6 +1,7 @@
 import { Router, type IRouter } from "express";
 import { SubmitContactBody, SubmitContactResponse } from "@workspace/api-zod";
-import { sendEmail, escapeHtml } from "../lib/email";
+import { sendEmail } from "../lib/email";
+import { renderEmail } from "../lib/emailTemplate";
 
 const router: IRouter = Router();
 
@@ -12,18 +13,28 @@ router.post("/contact", async (req, res) => {
 
   const { name, email, subject, message } = parsed.data;
 
-  const html = `
-    <div style="font-family: Helvetica, Arial, sans-serif; background:#0a0a0a; color:#f5f1e8; padding:24px;">
-      <div style="max-width:600px; margin:0 auto; border:1px solid #c9a961; padding:24px;">
-        <h2 style="color:#c9a961; letter-spacing:4px; font-weight:400; margin:0 0 16px;">ASSOCIATION WORLD — CONTACT</h2>
-        <p><strong style="color:#c9a961;">Name:</strong> ${escapeHtml(name)}</p>
-        <p><strong style="color:#c9a961;">Email:</strong> ${escapeHtml(email)}</p>
-        <p><strong style="color:#c9a961;">Subject:</strong> ${escapeHtml(subject)}</p>
-        <hr style="border:none; border-top:1px solid #c9a961; opacity:0.4; margin:16px 0;" />
-        <p style="white-space:pre-wrap;">${escapeHtml(message)}</p>
-      </div>
-    </div>
-  `;
+  const html = renderEmail({
+    preheader: `${subject} — from ${name}`,
+    eyebrow: "New Contact Message",
+    title: subject,
+    intro: "A new message has been submitted through the contact form on associationworld.com.",
+    badge: "Contact",
+    sections: [
+      {
+        heading: "From",
+        fields: [
+          { label: "Name", value: name, highlight: true },
+          { label: "Email", value: email },
+          { label: "Subject", value: subject },
+        ],
+      },
+      {
+        heading: "Message",
+        body: message,
+      },
+    ],
+    replyEmail: email,
+  });
 
   const result = await sendEmail({
     subject: `[Contact] ${subject} — ${name}`,

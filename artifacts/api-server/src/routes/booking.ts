@@ -1,6 +1,7 @@
 import { Router, type IRouter } from "express";
 import { SubmitBookingBody, SubmitBookingResponse } from "@workspace/api-zod";
-import { sendEmail, escapeHtml } from "../lib/email";
+import { sendEmail } from "../lib/email";
+import { renderEmail, type EmailSection } from "../lib/emailTemplate";
 
 const router: IRouter = Router();
 
@@ -41,60 +42,97 @@ router.post("/booking", async (req, res) => {
     return res.status(400).json({ error: "Hours are required for DJ bookings" });
   }
 
-  const row = (label: string, value?: string) =>
-    value
-      ? `<p style="margin:6px 0;"><strong style="color:#c9a961;">${label}:</strong> ${escapeHtml(value)}</p>`
-      : "";
-
   const waiverText = `By submitting this booking, the client acknowledges and agrees to the following: (1) Equipment liability — the client assumes full financial responsibility for any Association World DJ equipment that is damaged by water, spills, mishandling, or other damage while at the client's venue, and will pay the full cost of repair or replacement. (2) Performance injury release — the client releases Association World, its DJs, and artists from liability for any injuries sustained by performing artists at the client's venue or in the course of performance, and the client agrees to maintain a safe performance environment.`;
 
   const subjectTag = isDj ? "Booking" : "Artist Inquiry";
+  const eyebrow = isDj ? "New Booking Request" : "New Artist Inquiry";
+  const title = isDj
+    ? `${artist} — ${eventType}`
+    : `${artist} — ${eventType}`;
+  const intro = isDj
+    ? `A booking request has been submitted through associationworld.com. Review the details below and reply directly to the client to confirm pricing, deposit, and availability.`
+    : `An artist inquiry has been submitted through associationworld.com. Pricing and availability are confirmed by call or email — reply to the client to continue the conversation.`;
 
-  const html = `
-    <div style="font-family: Helvetica, Arial, sans-serif; background:#0a0a0a; color:#f5f1e8; padding:24px;">
-      <div style="max-width:600px; margin:0 auto; border:1px solid #c9a961; padding:24px;">
-        <h2 style="color:#c9a961; letter-spacing:4px; font-weight:400; margin:0 0 16px;">ASSOCIATION WORLD — ${isDj ? "BOOKING REQUEST" : "ARTIST INQUIRY"}</h2>
-        ${row("Name", name)}
-        ${row("Email", email)}
-        ${row("Phone", phone)}
-        <hr style="border:none; border-top:1px solid #c9a961; opacity:0.4; margin:16px 0;" />
-        ${row("Talent Type", talentType)}
-        ${row(isDj ? "Requested DJ" : "Requested Artist", artist)}
-        ${row("Event Type", eventType)}
-        ${row("Event Date", eventDate)}
-        ${row("Duration", duration)}
-        ${isDj ? row("Hours Booked", hours) : ""}
-        ${isDj ? row("DJ-Supplied Speakers", bringSpeakers ? "Yes (extra fee applies)" : "No") : ""}
-        <hr style="border:none; border-top:1px solid #c9a961; opacity:0.4; margin:16px 0;" />
-        ${row("City", city)}
-        ${row("Country", country)}
-        ${row("Venue Name", venueName)}
-        ${row("Directions", venueDirections)}
-        ${
-          isDj
-            ? `<hr style="border:none; border-top:1px solid #c9a961; opacity:0.4; margin:16px 0;" />
-               ${row("Down Payment", downPayment)}
-               ${row("Budget", budget)}`
-            : ""
+  const sections: EmailSection[] = [
+    {
+      heading: "Client",
+      fields: [
+        { label: "Name", value: name, highlight: true },
+        { label: "Email", value: email },
+        { label: "Phone", value: phone },
+      ],
+    },
+    {
+      heading: "Talent",
+      fields: [
+        { label: "Type", value: talentType },
+        { label: isDj ? "Requested DJ" : "Requested Artist", value: artist, highlight: true },
+        ...(isDj
+          ? [
+              { label: "Hours Booked", value: hours },
+              { label: "DJ-Supplied Speakers", value: bringSpeakers ? "Yes — extra fee applies" : "No" },
+            ]
+          : []),
+      ],
+    },
+    {
+      heading: "Event",
+      fields: [
+        { label: "Event Type", value: eventType },
+        { label: "Date", value: eventDate, highlight: true },
+        { label: "Duration", value: duration },
+      ],
+    },
+    {
+      heading: "Venue",
+      fields: [
+        { label: "City", value: city },
+        { label: "Country", value: country },
+        { label: "Venue Name", value: venueName },
+        { label: "Directions / Notes", value: venueDirections, multiline: true },
+      ],
+    },
+    ...(isDj
+      ? [
+          {
+            heading: "Pricing",
+            fields: [
+              { label: "Budget", value: budget },
+              { label: "Down Payment", value: downPayment },
+            ],
+            note: "Pricing negotiated per event. 50% deposit required to lock the date. Last-minute bookings may include additional fees.",
+          } satisfies EmailSection,
+        ]
+      : []),
+    ...(details
+      ? [
+          {
+            heading: "Additional Details",
+            body: details,
+          } satisfies EmailSection,
+        ]
+      : []),
+    isDj
+      ? {
+          heading: "Waiver",
+          fields: [{ label: "Accepted", value: "Yes — agreed at submission", highlight: true }],
+          note: waiverText,
         }
-        ${
-          details
-            ? `<hr style="border:none; border-top:1px solid #c9a961; opacity:0.4; margin:16px 0;" />
-               <p style="margin:6px 0;"><strong style="color:#c9a961;">Details:</strong></p>
-               <p style="white-space:pre-wrap; margin:6px 0;">${escapeHtml(details)}</p>`
-            : ""
-        }
-        ${
-          isDj
-            ? `<hr style="border:none; border-top:1px solid #c9a961; opacity:0.4; margin:16px 0;" />
-               <p style="margin:6px 0;"><strong style="color:#c9a961;">Waiver accepted:</strong> YES</p>
-               <p style="font-size:11px; line-height:1.6; color:#bfb38f; margin:8px 0 0;">${escapeHtml(waiverText)}</p>`
-            : `<hr style="border:none; border-top:1px solid #c9a961; opacity:0.4; margin:16px 0;" />
-               <p style="font-size:11px; line-height:1.6; color:#bfb38f; margin:8px 0 0;">Live artist inquiry — pricing &amp; availability to be confirmed by call or email.</p>`
-        }
-      </div>
-    </div>
-  `;
+      : {
+          heading: "Notes",
+          note: "Live artist inquiry — pricing and availability to be confirmed by call or email.",
+        },
+  ];
+
+  const html = renderEmail({
+    preheader: `${subjectTag} — ${artist} for ${eventType} on ${eventDate}`,
+    eyebrow,
+    title,
+    intro,
+    badge: isDj ? "Booking Request" : "Artist Inquiry",
+    sections,
+    replyEmail: email,
+  });
 
   const result = await sendEmail({
     subject: `[${subjectTag}] ${artist} — ${eventType} — ${name}`,
