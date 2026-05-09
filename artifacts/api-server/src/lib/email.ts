@@ -5,7 +5,7 @@ const apiKey = process.env.RESEND_API_KEY;
 
 export const resend = apiKey ? new Resend(apiKey) : null;
 
-export const MANAGEMENT_EMAIL = "management@associationworld.com";
+export const MANAGEMENT_EMAIL = "management@theassociationworld.com";
 
 export const FROM_EMAIL =
   process.env.RESEND_FROM_EMAIL ?? "Association World <onboarding@resend.dev>";
