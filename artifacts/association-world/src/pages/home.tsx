@@ -68,12 +68,6 @@ export default function Home() {
               className="absolute inset-0 w-full h-full object-cover"
             />
 
-            {/* Light bottom fade so text stays readable, no heavy vignette */}
-            <motion.div
-              animate={{ opacity: videoEnded ? 0 : 1 }}
-              transition={{ duration: 2.2, ease: "easeInOut" }}
-              className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/80 pointer-events-none"
-            />
           </div>
 
           {/* Hide decorative mascot while the video plays */}
