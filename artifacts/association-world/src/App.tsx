@@ -11,7 +11,6 @@ import DJDetail from "@/pages/dj-detail";
 import Artists from "@/pages/artists";
 import ArtistDetail from "@/pages/artist-detail";
 import Booking from "@/pages/booking";
-import Merch from "@/pages/merch";
 import Contact from "@/pages/contact";
 
 const queryClient = new QueryClient();
@@ -25,7 +24,6 @@ function Router() {
       <Route path="/artists" component={Artists} />
       <Route path="/artists/:slug" component={ArtistDetail} />
       <Route path="/booking" component={Booking} />
-      <Route path="/merch" component={Merch} />
       <Route path="/contact" component={Contact} />
       <Route component={NotFound} />
     </Switch>

@@ -7,7 +7,6 @@ const navLinks = [
   { href: "/djs", label: "DJS" },
   { href: "/artists", label: "ARTISTS" },
   { href: "/booking", label: "BOOKING" },
-  { href: "/merch", label: "MERCH" },
   { href: "/contact", label: "CONTACT" },
 ];
 
