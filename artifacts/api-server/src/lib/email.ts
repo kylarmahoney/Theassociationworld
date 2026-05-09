@@ -20,10 +20,12 @@ export async function sendEmail(params: {
     return { ok: false, error: "Email service not configured" };
   }
 
+  const toAddress = process.env.EMAIL_TO_OVERRIDE?.trim() || MANAGEMENT_EMAIL;
+
   try {
     const { error } = await resend.emails.send({
       from: FROM_EMAIL,
-      to: [MANAGEMENT_EMAIL],
+      to: [toAddress],
       subject: params.subject,
       html: params.html,
       replyTo: params.replyTo,
