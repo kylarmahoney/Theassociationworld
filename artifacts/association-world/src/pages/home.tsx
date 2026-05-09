@@ -71,6 +71,24 @@ export default function Home() {
           />
           <div className="absolute inset-0 z-0 bg-gradient-to-t from-background via-background/40 to-background/30 pointer-events-none" />
 
+          {/* Skip intro button */}
+          <AnimatePresence>
+            {!videoEnded && !showIntro && (
+              <motion.button
+                type="button"
+                onClick={() => setVideoEnded(true)}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="absolute bottom-8 right-6 md:bottom-10 md:right-10 z-30 px-4 py-2 text-xs md:text-sm uppercase tracking-[0.25em] text-primary/80 hover:text-primary border border-primary/30 hover:border-primary/70 bg-background/40 backdrop-blur-sm rounded-sm transition-colors"
+                aria-label="Skip intro video"
+              >
+                Skip Intro →
+              </motion.button>
+            )}
+          </AnimatePresence>
+
           <div className="container relative z-10 px-6 md:px-12 flex flex-col items-center text-center">
             <motion.div
               variants={staggerContainer}
