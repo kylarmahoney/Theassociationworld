@@ -11,7 +11,6 @@ export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
   const [djsOpen, setDjsOpen] = useState(false);
   const [artistsOpen, setArtistsOpen] = useState(false);
-  const [videoEnded, setVideoEnded] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -49,28 +48,11 @@ export default function Home() {
       <PageLayout hideNav={showIntro} hideFooter={showIntro}>
         {/* HERO SECTION */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-          {/* Ambient Background — Saint Lucia Pitons live video, fades to original */}
-          <div className="absolute inset-0 z-0 overflow-hidden">
-            {/* Original ambient gradient (always present underneath) */}
+          {/* Ambient Background */}
+          <div className="absolute inset-0 z-0">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/10 via-background to-background" />
-
-            {/* Video layer that fades out after playback */}
-            <motion.video
-              src="/brand/pitons.mp4"
-              autoPlay
-              muted
-              playsInline
-              preload="auto"
-              onEnded={() => setVideoEnded(true)}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: videoEnded ? 0 : 1 }}
-              transition={{ duration: videoEnded ? 2.2 : 1.2, ease: "easeInOut" }}
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-
+            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
           </div>
-
-          {/* Hide decorative mascot while the video plays */}
 
           <div className="container relative z-10 px-6 md:px-12 flex flex-col items-center text-center">
             <motion.div
@@ -96,12 +78,12 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* Decorative Mascot — only after the video has finished */}
+          {/* Decorative Mascot */}
           <motion.div 
-            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl pointer-events-none mix-blend-screen"
+            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl opacity-10 pointer-events-none mix-blend-screen"
             initial={{ opacity: 0, y: 100 }}
-            animate={!showIntro && videoEnded ? { opacity: 0.1, y: 0 } : { opacity: 0, y: 100 }}
-            transition={{ duration: 2, delay: 0.3 }}
+            animate={!showIntro ? { opacity: 0.1, y: 0 } : { opacity: 0, y: 100 }}
+            transition={{ duration: 2, delay: 0.5 }}
           >
             <img src="/brand/mascot.png" alt="Mascot" className="w-full h-auto mask-image-bottom" />
           </motion.div>
