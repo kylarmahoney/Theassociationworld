@@ -137,7 +137,7 @@ export function renderEmail(opts: EmailTemplateOptions): string {
       </table>
 
       <p style="max-width:640px; margin:18px auto 0; color:${MUTED}; opacity:0.5; font-size:10px; line-height:1.6; text-align:center;">
-        This message was generated from a form submission on associationworld.com. Forwarded to ${MANAGEMENT_EMAIL} for review.
+        This message was generated from a form submission on theassociationworld.com. Forwarded to ${MANAGEMENT_EMAIL} for review.
       </p>
     </td>
   </tr>
