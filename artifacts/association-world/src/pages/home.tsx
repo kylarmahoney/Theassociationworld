@@ -11,6 +11,7 @@ export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
   const [djsOpen, setDjsOpen] = useState(false);
   const [artistsOpen, setArtistsOpen] = useState(false);
+  const [videoEnded, setVideoEnded] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -48,38 +49,36 @@ export default function Home() {
       <PageLayout hideNav={showIntro} hideFooter={showIntro}>
         {/* HERO SECTION */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-          {/* Ambient Background — Saint Lucia Pitons live video */}
+          {/* Ambient Background — Saint Lucia Pitons live video, fades to original */}
           <div className="absolute inset-0 z-0 overflow-hidden">
-            <video
+            {/* Original ambient gradient (always present underneath) */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/10 via-background to-background" />
+            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
+
+            {/* Video layer that fades out after playback */}
+            <motion.video
               src="/brand/pitons.mp4"
               autoPlay
               muted
-              loop
               playsInline
               preload="auto"
-              poster="/brand/logo-seal.png"
-              className="absolute inset-0 w-full h-full object-cover opacity-60"
+              onEnded={() => setVideoEnded(true)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: videoEnded ? 0 : 0.6 }}
+              transition={{ duration: videoEnded ? 2.2 : 1.2, ease: "easeInOut" }}
+              className="absolute inset-0 w-full h-full object-cover"
             />
-            {/* Dark vignette + gold tint */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(0,0,0,0.55)_0%,_rgba(0,0,0,0.85)_70%,_#000_100%)]" />
-            <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent mix-blend-screen" />
-            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
-          </div>
 
-          {/* Logo Seal centered behind text */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={!showIntro ? { opacity: 0.18, scale: 1 } : { opacity: 0, scale: 0.9 }}
-            transition={{ duration: 2, delay: 0.3 }}
-            className="absolute inset-0 z-[1] flex items-center justify-center pointer-events-none"
-          >
-            <img
-              src="/brand/logo-seal.png"
-              alt=""
-              className="w-[60vw] max-w-[640px] h-auto drop-shadow-[0_0_80px_rgba(201,169,97,0.5)]"
-            />
-          </motion.div>
+            {/* Vignette / blend overlays only while video is visible */}
+            <motion.div
+              animate={{ opacity: videoEnded ? 0 : 1 }}
+              transition={{ duration: 2.2, ease: "easeInOut" }}
+              className="absolute inset-0 pointer-events-none"
+            >
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(0,0,0,0.45)_0%,_rgba(0,0,0,0.8)_75%,_#000_100%)]" />
+              <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/30 to-background" />
+            </motion.div>
+          </div>
 
           <div className="container relative z-10 px-6 md:px-12 flex flex-col items-center text-center">
             <motion.div
