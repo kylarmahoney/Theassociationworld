@@ -63,21 +63,20 @@ export default function Home() {
               preload="auto"
               onEnded={() => setVideoEnded(true)}
               initial={{ opacity: 0 }}
-              animate={{ opacity: videoEnded ? 0 : 0.6 }}
+              animate={{ opacity: videoEnded ? 0 : 1 }}
               transition={{ duration: videoEnded ? 2.2 : 1.2, ease: "easeInOut" }}
               className="absolute inset-0 w-full h-full object-cover"
             />
 
-            {/* Vignette / blend overlays only while video is visible */}
+            {/* Light bottom fade so text stays readable, no heavy vignette */}
             <motion.div
               animate={{ opacity: videoEnded ? 0 : 1 }}
               transition={{ duration: 2.2, ease: "easeInOut" }}
-              className="absolute inset-0 pointer-events-none"
-            >
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(0,0,0,0.45)_0%,_rgba(0,0,0,0.8)_75%,_#000_100%)]" />
-              <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/30 to-background" />
-            </motion.div>
+              className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/80 pointer-events-none"
+            />
           </div>
+
+          {/* Hide decorative mascot while the video plays */}
 
           <div className="container relative z-10 px-6 md:px-12 flex flex-col items-center text-center">
             <motion.div
@@ -103,12 +102,12 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* Decorative Mascot */}
+          {/* Decorative Mascot — only after the video has finished */}
           <motion.div 
-            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl opacity-10 pointer-events-none mix-blend-screen"
+            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl pointer-events-none mix-blend-screen"
             initial={{ opacity: 0, y: 100 }}
-            animate={!showIntro ? { opacity: 0.1, y: 0 } : { opacity: 0, y: 100 }}
-            transition={{ duration: 2, delay: 0.5 }}
+            animate={!showIntro && videoEnded ? { opacity: 0.1, y: 0 } : { opacity: 0, y: 100 }}
+            transition={{ duration: 2, delay: 0.3 }}
           >
             <img src="/brand/mascot.png" alt="Mascot" className="w-full h-auto mask-image-bottom" />
           </motion.div>
