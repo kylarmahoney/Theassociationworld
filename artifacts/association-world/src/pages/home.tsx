@@ -9,6 +9,7 @@ import { artists } from "@/data/artists";
 
 export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
+  const [videoEnded, setVideoEnded] = useState(false);
   const [djsOpen, setDjsOpen] = useState(false);
   const [artistsOpen, setArtistsOpen] = useState(false);
 
@@ -54,6 +55,22 @@ export default function Home() {
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
           </div>
 
+          {/* Background intro video — fades to mascot when finished */}
+          <motion.video
+            key="hero-intro-video"
+            src="/brand/hero-intro.mov"
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            onEnded={() => setVideoEnded(true)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: videoEnded ? 0 : 0.55 }}
+            transition={{ duration: 1.4, ease: "easeInOut" }}
+            className="absolute inset-0 z-0 w-full h-full object-cover pointer-events-none mix-blend-screen"
+          />
+          <div className="absolute inset-0 z-0 bg-gradient-to-t from-background via-background/40 to-background/30 pointer-events-none" />
+
           <div className="container relative z-10 px-6 md:px-12 flex flex-col items-center text-center">
             <motion.div
               variants={staggerContainer}
@@ -78,12 +95,16 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* Decorative Mascot */}
-          <motion.div 
-            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl opacity-10 pointer-events-none mix-blend-screen"
+          {/* Decorative Mascot — appears as the intro video fades out */}
+          <motion.div
+            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl pointer-events-none mix-blend-screen"
             initial={{ opacity: 0, y: 100 }}
-            animate={!showIntro ? { opacity: 0.1, y: 0 } : { opacity: 0, y: 100 }}
-            transition={{ duration: 2, delay: 0.5 }}
+            animate={
+              !showIntro && videoEnded
+                ? { opacity: 0.18, y: 0 }
+                : { opacity: 0, y: 60 }
+            }
+            transition={{ duration: 1.6, ease: "easeOut" }}
           >
             <img src="/brand/mascot.png" alt="Mascot" className="w-full h-auto mask-image-bottom" />
           </motion.div>
