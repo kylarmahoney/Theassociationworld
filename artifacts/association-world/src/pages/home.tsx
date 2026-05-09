@@ -55,7 +55,7 @@ export default function Home() {
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
           </div>
 
-          {/* Background intro video — fullscreen, fades to mascot when finished */}
+          {/* Background intro video — fades to mascot when finished */}
           <motion.video
             key="hero-intro-video"
             src="/brand/hero-intro.mov"
@@ -64,12 +64,12 @@ export default function Home() {
             playsInline
             preload="auto"
             onEnded={() => setVideoEnded(true)}
-            initial={{ opacity: 1 }}
-            animate={{ opacity: videoEnded ? 0 : 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: videoEnded ? 0 : 0.55 }}
             transition={{ duration: 1.4, ease: "easeInOut" }}
-            className="fixed inset-0 z-[90] w-screen h-screen object-cover pointer-events-none"
-            style={{ display: videoEnded ? "none" : "block" }}
+            className="absolute inset-0 z-0 w-full h-full object-cover pointer-events-none mix-blend-screen"
           />
+          <div className="absolute inset-0 z-0 bg-gradient-to-t from-background via-background/40 to-background/30 pointer-events-none" />
 
           <div className="container relative z-10 px-6 md:px-12 flex flex-col items-center text-center">
             <motion.div
