@@ -75,7 +75,7 @@ export default function Home() {
             <motion.div
               variants={staggerContainer}
               initial="hidden"
-              animate={!showIntro ? "visible" : "hidden"}
+              animate={videoEnded ? "visible" : "hidden"}
               className="flex flex-col items-center space-y-8"
             >
               <motion.div variants={revealVariants} className="space-y-4">
