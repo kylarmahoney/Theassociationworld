@@ -50,8 +50,8 @@ router.post("/booking", async (req, res) => {
     ? `${artist} — ${eventType}`
     : `${artist} — ${eventType}`;
   const intro = isDj
-    ? `A booking request has been submitted through associationworld.com. Review the details below and reply directly to the client to confirm pricing, deposit, and availability.`
-    : `An artist inquiry has been submitted through associationworld.com. Pricing and availability are confirmed by call or email — reply to the client to continue the conversation.`;
+    ? `A booking request has been submitted through theassociationworld.com. Review the details below and reply directly to the client to confirm pricing, deposit, and availability.`
+    : `An artist inquiry has been submitted through theassociationworld.com. Pricing and availability are confirmed by call or email — reply to the client to continue the conversation.`;
 
   const sections: EmailSection[] = [
     {

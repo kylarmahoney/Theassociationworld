@@ -17,7 +17,7 @@ router.post("/contact", async (req, res) => {
     preheader: `${subject} — from ${name}`,
     eyebrow: "New Contact Message",
     title: subject,
-    intro: "A new message has been submitted through the contact form on associationworld.com.",
+    intro: "A new message has been submitted through the contact form on theassociationworld.com.",
     badge: "Contact",
     sections: [
       {
