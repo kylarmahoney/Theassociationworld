@@ -121,18 +121,14 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* Decorative Backdrop */}
-          <motion.div
-            className="absolute inset-0 z-[2] flex items-center justify-center pointer-events-none"
-            initial={{ opacity: 0 }}
-            animate={videoEnded ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 1.6, ease: "easeOut" }}
+          {/* Decorative Mascot */}
+          <motion.div 
+            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl opacity-10 pointer-events-none mix-blend-screen"
+            initial={{ opacity: 0, y: 100 }}
+            animate={!showIntro ? { opacity: 0.1, y: 0 } : { opacity: 0, y: 100 }}
+            transition={{ duration: 2, delay: 0.5 }}
           >
-            <img
-              src="/brand/intro-bg.png"
-              alt="Association World"
-              className="w-full h-full object-cover md:object-contain max-w-5xl"
-            />
+            <img src="/brand/mascot.png" alt="Mascot" className="w-full h-auto mask-image-bottom" />
           </motion.div>
         </section>
 
