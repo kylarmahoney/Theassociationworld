@@ -21,6 +21,15 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
+  const heroStagger = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.5, delayChildren: 0.4 } },
+  };
+  const heroReveal = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 2.2, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } },
+  };
+
   const skipVideo = () => {
     if (videoRef.current) {
       try { videoRef.current.pause(); } catch {}
@@ -99,19 +108,19 @@ export default function Home() {
 
           <div className="container relative z-10 px-6 md:px-12 flex flex-col items-center text-center">
             <motion.div
-              variants={staggerContainer}
+              variants={heroStagger}
               initial="hidden"
               animate={!showIntro && videoEnded ? "visible" : "hidden"}
               className="flex flex-col items-center space-y-8"
             >
-              <motion.div variants={revealVariants} className="space-y-4">
+              <motion.div variants={heroReveal} className="space-y-4">
                 <h1 className="text-5xl md:text-7xl lg:text-9xl font-serif text-transparent bg-clip-text bg-gradient-to-b from-[#f5e6b8] via-[#c9a961] to-[#8a6f2e] tracking-[0.1em] drop-shadow-[0_0_40px_rgba(201,169,97,0.6)]">
                   ASSOCIATION WORLD
                 </h1>
                 <p className="text-primary tracking-[0.3em] md:tracking-[0.5em] text-sm md:text-base uppercase font-medium">Loyalty. RESPECT. Silence. Unity.</p>
               </motion.div>
               
-              <motion.div variants={revealVariants} className="max-w-2xl text-muted-foreground/80 leading-relaxed font-light">
+              <motion.div variants={heroReveal} className="max-w-2xl text-muted-foreground/80 leading-relaxed font-light">
                 <p>Not Entertainment. A Movement.</p>
                 <p>We Dictate The Pulse Of The Night.
 
