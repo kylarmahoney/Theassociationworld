@@ -23,7 +23,7 @@ export default function Home() {
 
   const heroStagger = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.5, delayChildren: 0.4 } },
+    visible: { opacity: 1, transition: { staggerChildren: 0.5, delayChildren: 1.4 } },
   };
   const heroReveal = {
     hidden: { opacity: 0, y: 30 },
