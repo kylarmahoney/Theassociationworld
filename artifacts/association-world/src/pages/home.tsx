@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PageLayout, revealVariants, staggerContainer } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,8 @@ export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
   const [djsOpen, setDjsOpen] = useState(false);
   const [artistsOpen, setArtistsOpen] = useState(false);
+  const [videoEnded, setVideoEnded] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -18,6 +20,13 @@ export default function Home() {
     }, 2500);
     return () => clearTimeout(timer);
   }, []);
+
+  const skipVideo = () => {
+    if (videoRef.current) {
+      try { videoRef.current.pause(); } catch {}
+    }
+    setVideoEnded(true);
+  };
 
   return (
     <>
@@ -53,6 +62,40 @@ export default function Home() {
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/10 via-background to-background" />
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
           </div>
+
+          {/* Background Intro Video */}
+          <AnimatePresence>
+            {!videoEnded && (
+              <motion.div
+                key="hero-video"
+                className="absolute inset-0 z-[1] overflow-hidden"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1.4, ease: "easeInOut" }}
+              >
+                <video
+                  ref={videoRef}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  src="/brand/intro.mp4"
+                  autoPlay
+                  muted
+                  playsInline
+                  preload="auto"
+                  onEnded={() => setVideoEnded(true)}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/50 to-background pointer-events-none" />
+                <button
+                  type="button"
+                  onClick={skipVideo}
+                  className="absolute bottom-6 right-6 md:bottom-8 md:right-8 z-20 px-4 py-2 border border-primary/40 bg-background/60 backdrop-blur-sm text-primary text-[10px] tracking-[0.3em] uppercase hover:bg-primary hover:text-primary-foreground transition-colors duration-300 rounded-none"
+                  aria-label="Skip intro video"
+                >
+                  Skip ›
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           <div className="container relative z-10 px-6 md:px-12 flex flex-col items-center text-center">
             <motion.div
