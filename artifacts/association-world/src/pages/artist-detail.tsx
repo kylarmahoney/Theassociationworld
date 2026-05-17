@@ -57,7 +57,7 @@ export default function ArtistDetail() {
                 <div className="border border-border/50 bg-card/30 backdrop-blur-sm p-5 space-y-2 text-sm font-light">
                   <p><span className="text-primary/80">Pricing:</span> Negotiated per event with management.</p>
                   <p><span className="text-primary/80">Deposit:</span> 50% required to confirm the booking.</p>
-                  <p><span className="text-primary/80">Last-minute bookings:</span> may include additional costs and fees.</p>
+                  <p><span className="text-primary/80">Last-minute bookings:</span> May include additional costs and fees.</p>
                 </div>
               </div>
 

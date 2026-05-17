@@ -421,7 +421,7 @@ export default function Booking() {
                             )}
                             {isLastMinute && (
                               <p className="text-primary/80">
-                                Last-minute booking (within 14 days) — may include additional costs and fees.
+                                Last-minute booking (within 14 days) — May include additional costs and fees.
                               </p>
                             )}
                           </motion.div>
