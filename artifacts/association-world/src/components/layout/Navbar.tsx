@@ -1,7 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
@@ -74,18 +73,15 @@ export function Navbar() {
               </Link>
             );
           })}
+          <a
+            href="https://shop.theassociationworld.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative whitespace-nowrap text-[11px] md:text-sm tracking-[0.18em] md:tracking-[0.2em] font-medium transition-all duration-300 hover:text-primary text-foreground/70"
+          >
+            MERCH
+          </a>
         </nav>
-
-        {/* Merch icon */}
-        <a
-          href="https://shop.theassociationworld.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="shrink-0 text-foreground/60 hover:text-primary transition-colors duration-300"
-          aria-label="Merch Shop"
-        >
-          <ShoppingBag className="w-5 h-5" />
-        </a>
 
         {/* Book Now (desktop only) */}
         <Link href="/booking" className="hidden lg:block shrink-0">

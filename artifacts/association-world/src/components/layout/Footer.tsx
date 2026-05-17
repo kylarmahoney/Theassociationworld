@@ -25,7 +25,7 @@ export function Footer() {
           </div>
 
           {/* Links */}
-          <div className="flex flex-wrap justify-center gap-6 md:gap-12">
+          <div className="flex flex-wrap justify-center items-center gap-6 md:gap-12">
             {["DJS", "ARTISTS", "BOOKING", "CONTACT"].map((link) => (
               <Link key={link} href={`/${link.toLowerCase()}`}>
                 <span className="text-xs tracking-[0.2em] text-foreground/60 hover:text-primary transition-colors cursor-pointer uppercase">
