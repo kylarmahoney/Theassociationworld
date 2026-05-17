@@ -1,0 +1,9 @@
+[build]
+builder = "nixpacks"
+buildCommand = "pnpm install && pnpm --filter @workspace/association-world run build && pnpm --filter @workspace/api-server run build"
+
+[deploy]
+startCommand = "pnpm --filter @workspace/api-server run start"
+healthcheckPath = "/api/health"
+healthcheckTimeout = 30
+restartPolicyType = "on_failure"
