@@ -37,7 +37,7 @@ app.use("/api", router);
 
 const staticPath = path.resolve(__dirname, "../../association-world/dist/public");
 app.use(express.static(staticPath));
-app.get("*", (_req, res) => {
+app.get("/{*path}", (_req, res) => {
   res.sendFile(path.join(staticPath, "index.html"));
 });
 

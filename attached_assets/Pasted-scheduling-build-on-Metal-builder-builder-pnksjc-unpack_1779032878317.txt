@@ -1,0 +1,119 @@
+scheduling build on Metal builder "builder-pnksjc"
+unpacking archive
+52.8 MB
+246ms
+using build driver nixpacks-v1.41.0
+ 
+╔══════════════════════════════ Nixpacks v1.41.0 ══════════════════════════════╗
+║ setup      │ nodejs_24, pnpm-10_x, openssl                                   ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ install    │ npm install -g corepack@0.24.1 && corepack enable               ║
+║            │ pnpm i --frozen-lockfile                                        ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ build      │ pnpm install && pnpm --filter @workspace/association-world run  ║
+║            │ build && pnpm --filter @workspace/api-server run build          ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ start      │ pnpm --filter @workspace/api-server run start                   ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+ 
+ 
+Saved output to:
+  snapshot-target-unpack
+
+internal
+load build definition from Dockerfile
+0ms
+
+internal
+load metadata for ghcr.io/railwayapp/nixpacks:ubuntu-1745885067
+150ms
+uploading snapshot
+51.5 MB
+728ms
+
+internal
+load .dockerignore
+0ms
+SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ARG "RESEND_API_KEY") (line 11)(https://docs.docker.com/go/dockerfile/rule/secrets-used-in-arg-or-env/)
+ details: Sensitive data should not be used in the ARG or ENV commands
+SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ARG "SESSION_SECRET") (line 11)(https://docs.docker.com/go/dockerfile/rule/secrets-used-in-arg-or-env/)
+ details: Sensitive data should not be used in the ARG or ENV commands
+SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ENV "RESEND_API_KEY") (line 12)(https://docs.docker.com/go/dockerfile/rule/secrets-used-in-arg-or-env/)
+ details: Sensitive data should not be used in the ARG or ENV commands
+SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ENV "SESSION_SECRET") (line 12)(https://docs.docker.com/go/dockerfile/rule/secrets-used-in-arg-or-env/)
+ details: Sensitive data should not be used in the ARG or ENV commands
+UndefinedVar: Usage of undefined variable '$NIXPACKS_PATH' (line 18)(https://docs.docker.com/go/dockerfile/rule/undefined-var/)
+ details: Variables should be defined before their use
+
+stage-0
+FROM ghcr.io/railwayapp/nixpacks:ubuntu-1745885067@sha256:d45c89d80e13d7ad0fd555b5130f22a866d9dd10e861f589932303ef2314c7de
+58ms
+
+internal
+load build context
+0ms
+
+stage-0
+RUN nix-env -if .nixpacks/nixpkgs-23f9169c4ccce521379e602cc82ed873a1f1b52b.nix && nix-collect-garbage -d cached
+0ms
+
+stage-0
+COPY .nixpacks/nixpkgs-23f9169c4ccce521379e602cc82ed873a1f1b52b.nix .nixpacks/nixpkgs-23f9169c4ccce521379e602cc82ed873a1f1b52b.nix cached
+0ms
+
+stage-0
+WORKDIR /app/ cached
+0ms
+
+stage-0
+COPY . /app/.
+663ms
+
+stage-0
+RUN npm install -g corepack@0.24.1 && corepack enable
+1s
+changed 1 package in 604ms
+
+stage-0
+RUN pnpm i --frozen-lockfile
+5s
+Done in 3.8s using pnpm v10.26.1
+
+stage-0
+COPY . /app/.
+1s
+
+stage-0
+RUN pnpm install && pnpm --filter @workspace/association-world run build && pnpm --filter @workspace/api-server run build
+8s
+⚡ Done in 215ms
+
+stage-0
+RUN printf '\nPATH=/app/node_modules/.bin:$PATH' >> /root/.profile
+366ms
+
+stage-0
+COPY . /app
+583ms
+
+exporting to docker image format
+8s
+containerimage.digest: sha256:12afe8cde7497e61723a5dad7590c267737c50f2c6cac75d024741a77a9330a3
+containerimage.descriptor: eyJtZWRpYVR5cGUiOiJhcHBsaWNhdGlvbi92bmQub2NpLmltYWdlLm1hbmlmZXN0LnYxK2pzb24iLCJkaWdlc3QiOiJzaGEyNTY6MTJhZmU4Y2RlNzQ5N2U2MTcyM2E1ZGFkNzU5MGMyNjc3MzdjNTBmMmM2Y2FjNzVkMDI0NzQxYTc3YTkzMzBhMyIsInNpemUiOjI5NTksImFubm90YXRpb25zIjp7Im9yZy5vcGVuY29udGFpbmVycy5pbWFnZS5jcmVhdGVkIjoiMjAyNi0wNS0xN1QxNTo0NTo1N1oifSwicGxhdGZvcm0iOnsiYXJjaGl0ZWN0dXJlIjoiYW1kNjQiLCJvcyI6ImxpbnV4In19
+containerimage.config.digest: sha256:836bf8ca177b39e4f249629786c9aeb2444408409322b771498799b8146ce23e
+image push
+425.2 MB / 425.3 MB
+10.5s
+ 
+====================
+Starting Healthcheck
+====================
+Path: /api/healthz
+Retry window: 30s
+ 
+Attempt #1 failed with service unavailable. Continuing to retry for 19s
+Attempt #2 failed with service unavailable. Continuing to retry for 8s
+ 
+1/1 replicas never became healthy!
+
+Healthcheck failed!
