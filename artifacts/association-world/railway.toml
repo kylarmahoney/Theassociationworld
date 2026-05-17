@@ -1,8 +1,8 @@
 [build]
 builder = "nixpacks"
-buildCommand = "pnpm install --frozen-lockfile && pnpm --filter @workspace/association-world run build"
+buildCommand = "cd ../../ && pnpm install && pnpm --filter @workspace/association-world run build"
 
 [deploy]
-startCommand = "pnpm --filter @workspace/association-world run serve"
+startCommand = "cd ../../ && pnpm --filter @workspace/association-world run serve"
 healthcheckTimeout = 30
 restartPolicyType = "on_failure"
