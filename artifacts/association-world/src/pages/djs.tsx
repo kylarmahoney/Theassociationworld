@@ -46,6 +46,7 @@ export default function DJs() {
                   className="group relative"
                 >
                   {/* Portrait frame */}
+                  <Link href={`/djs/${dj.slug}`} className="block">
                   <div className="relative aspect-[3/4] overflow-hidden bg-zinc-950 rounded-sm shadow-[0_25px_60px_-20px_rgba(0,0,0,0.8)] transition-all duration-700 group-hover:shadow-[0_35px_80px_-20px_rgba(201,169,97,0.35)] group-hover:-translate-y-1">
                     {/* Hairline gold frame */}
                     <div className="absolute inset-0 border border-border/40 group-hover:border-primary/60 transition-colors duration-700 z-30 pointer-events-none" />
@@ -88,13 +89,14 @@ export default function DJs() {
 
                     {/* Book button slides up */}
                     <div className="absolute inset-x-5 bottom-5 z-20 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100">
-                      <Link href={`/booking?artist=${encodeURIComponent(dj.stageName)}`}>
+                      <Link href={`/booking?artist=${encodeURIComponent(dj.stageName)}`} onClick={(e) => e.stopPropagation()}>
                         <Button className="w-full bg-primary/10 hover:bg-primary text-primary hover:text-primary-foreground border border-primary/80 uppercase tracking-[0.25em] text-[10px] rounded-none h-9 backdrop-blur-sm">
                           Request Booking
                         </Button>
                       </Link>
                     </div>
                   </div>
+                  </Link>
 
                   {/* Meta below frame */}
                   <div className="pt-6 space-y-2 text-center">

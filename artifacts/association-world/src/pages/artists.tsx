@@ -32,6 +32,7 @@ export default function Artists() {
                 transition={{ duration: 0.8, delay: (i % 3) * 0.1 }}
                 className="group relative"
               >
+                <Link href={`/artists/${artist.slug}`} className="block">
                 <div className="aspect-[3/4] overflow-hidden rounded-sm bg-secondary relative border border-border/20 group-hover:border-primary/50 transition-colors duration-500 shadow-xl">
                   {/* LAYER 1 — Revealed photo (underneath) */}
                   <img
@@ -72,7 +73,7 @@ export default function Artists() {
                       {artist.bio}
                     </p>
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
-                      <Link href={`/booking?artist=${encodeURIComponent(artist.name)}`}>
+                      <Link href={`/booking?artist=${encodeURIComponent(artist.name)}`} onClick={(e) => e.stopPropagation()}>
                         <Button className="w-full bg-primary/10 hover:bg-primary text-primary hover:text-primary-foreground border border-primary uppercase tracking-widest text-xs rounded-none">
                           Inquire
                         </Button>
@@ -80,6 +81,7 @@ export default function Artists() {
                     </div>
                   </div>
                 </div>
+                </Link>
               </motion.div>
             ))}
           </div>
