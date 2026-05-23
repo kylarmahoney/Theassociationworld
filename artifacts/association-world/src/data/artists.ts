@@ -34,6 +34,13 @@ const roster: RosterEntry[] = [
     bio: "Houston-bred rap and hip-hop with weight and swagger — heavy chains, heavier bars, and an unmistakable presence.",
     photos: ["/artists/quanyboy-1.jpeg", "/artists/quanyboy-2.jpeg"],
   },
+  {
+    id: 4,
+    name: "YODATALIBAN",
+    discipline: "Rap / Hip-Hop",
+    bio: "Rap and hip-hop with a calm, calculated edge — streetwise storytelling, deliberate cadence, and a quiet command of the mic.",
+    photos: ["/artists/yodataliban-1.jpeg", "/artists/yodataliban-2.jpeg"],
+  },
 ];
 
 export const artists: Artist[] = roster.map((a) => ({
