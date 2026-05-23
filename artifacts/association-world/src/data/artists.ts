@@ -27,6 +27,13 @@ const roster: RosterEntry[] = [
     bio: "Rap, hip-hop and R&B with a sharp, understated cool — measured delivery, lyrical patience, and a presence that holds the room.",
     photos: ["/artists/ske-1.jpeg", "/artists/ske-2.jpeg"],
   },
+  {
+    id: 3,
+    name: "QUANYBOY",
+    discipline: "Rap / Hip-Hop",
+    bio: "Houston-bred rap and hip-hop with weight and swagger — heavy chains, heavier bars, and an unmistakable presence.",
+    photos: ["/artists/quanyboy-1.jpeg", "/artists/quanyboy-2.jpeg"],
+  },
 ];
 
 export const artists: Artist[] = roster.map((a) => ({
