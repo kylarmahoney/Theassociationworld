@@ -20,70 +20,75 @@ export default function Artists() {
         </div>
       </div>
 
-      <section className="py-12 bg-background">
-        <div className="container px-6 md:px-12 mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-            {artists.map((artist, i) => (
-              <motion.div
-                key={artist.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.8, delay: (i % 3) * 0.1 }}
-                className="group relative"
-              >
-                <Link href={`/artists/${artist.slug}`} className="block">
-                <div className="aspect-[3/4] overflow-hidden rounded-sm bg-secondary relative border border-border/20 group-hover:border-primary/50 transition-colors duration-500 shadow-xl">
-                  {/* LAYER 1 — Revealed photo (underneath) */}
-                  <img
-                    src={artist.photo}
-                    alt={artist.name}
-                    loading="lazy"
-                    className="absolute inset-0 w-full h-full object-cover filter grayscale contrast-110 opacity-0 scale-110 group-hover:opacity-100 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-[1100ms] ease-out"
-                  />
+      <section className="pb-32 bg-background">
+        <div className="container px-6 md:px-12 mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-16 md:gap-y-20">
+            {artists.map((artist, i) => {
+              const number = String(i + 1).padStart(2, "0");
+              return (
+                <motion.div
+                  key={artist.id}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.7, delay: (i % 4) * 0.08 }}
+                  className="group relative"
+                >
+                  {/* Portrait frame */}
+                  <Link href={`/artists/${artist.slug}`} className="block">
+                  <div className="relative aspect-[3/4] overflow-hidden bg-zinc-950 rounded-sm shadow-[0_25px_60px_-20px_rgba(0,0,0,0.8)] transition-all duration-700 group-hover:shadow-[0_35px_80px_-20px_rgba(201,169,97,0.35)] group-hover:-translate-y-1">
+                    {/* Hairline gold frame */}
+                    <div className="absolute inset-0 border border-border/40 group-hover:border-primary/60 transition-colors duration-700 z-30 pointer-events-none" />
+                    <div className="absolute inset-[3px] border border-primary/0 group-hover:border-primary/10 transition-colors duration-700 z-30 pointer-events-none" />
 
-                  {/* LAYER 2 — Silhouette (on top, fades out on hover) */}
-                  <div className="absolute inset-0 transition-opacity duration-700 group-hover:opacity-0">
-                    <div className="absolute inset-0 bg-gradient-to-b from-zinc-900 via-black to-zinc-950" />
-                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(201,169,97,0.12),transparent_60%)]" />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <img
-                        src="/brand/logo-seal.png"
-                        alt=""
-                        aria-hidden="true"
-                        className="w-1/2 object-contain opacity-30 mix-blend-screen filter grayscale"
-                      />
+                    {/* Image */}
+                    <img
+                      src={artist.photo}
+                      alt={artist.name}
+                      loading="lazy"
+                      className="absolute inset-0 w-full h-full object-cover transition-all duration-[1200ms] ease-out filter grayscale contrast-110 brightness-90 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105"
+                    />
+
+                    {/* Film vignette */}
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.75)_100%)] pointer-events-none z-10" />
+
+                    {/* Bottom gradient */}
+                    <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-background via-background/70 to-transparent pointer-events-none z-10" />
+
+                    {/* Light sweep on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-primary/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-[1400ms] ease-out pointer-events-none z-20" />
+
+                    {/* Number tag */}
+                    <div className="absolute top-5 left-5 text-[10px] tracking-[0.35em] text-primary/60 font-light z-20">
+                      {number}
                     </div>
-                  </div>
 
-                  {/* Bottom gradient always present for legibility */}
-                  <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-background via-background/60 to-transparent pointer-events-none z-10" />
-
-                  {/* Text content */}
-                  <div className="absolute inset-0 p-8 flex flex-col justify-end z-20">
-                    <Link href={`/artists/${artist.slug}`}>
-                      <h2 className="text-2xl lg:text-3xl font-serif text-primary uppercase tracking-widest mb-2 drop-shadow-[0_0_10px_rgba(201,169,97,0.5)] cursor-pointer hover:text-primary/80 transition-colors">
-                        {artist.name}
-                      </h2>
-                    </Link>
-                    <p className="text-xs tracking-[0.2em] text-foreground/80 uppercase mb-3">
-                      {artist.discipline}
-                    </p>
-                    <p className="text-sm text-muted-foreground font-light mb-6 max-w-xs leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                      {artist.bio}
-                    </p>
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
+                    {/* Inquire button slides up */}
+                    <div className="absolute inset-x-5 bottom-5 z-20 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100">
                       <Link href={`/booking?artist=${encodeURIComponent(artist.name)}`} onClick={(e) => e.stopPropagation()}>
-                        <Button className="w-full bg-primary/10 hover:bg-primary text-primary hover:text-primary-foreground border border-primary uppercase tracking-widest text-xs rounded-none">
+                        <Button className="w-full bg-primary/10 hover:bg-primary text-primary hover:text-primary-foreground border border-primary/80 uppercase tracking-[0.25em] text-[10px] rounded-none h-9 backdrop-blur-sm">
                           Inquire
                         </Button>
                       </Link>
                     </div>
                   </div>
-                </div>
-                </Link>
-              </motion.div>
-            ))}
+                  </Link>
+
+                  {/* Meta below frame */}
+                  <div className="pt-6 space-y-2 text-center">
+                    <Link href={`/artists/${artist.slug}`}>
+                      <h2 className="font-serif text-xl md:text-2xl uppercase tracking-[0.15em] text-foreground group-hover:text-primary transition-colors duration-500 cursor-pointer hover:text-primary">
+                        {artist.name}
+                      </h2>
+                    </Link>
+                    <div className="mx-auto h-px w-8 bg-primary/40 group-hover:w-16 group-hover:bg-primary transition-all duration-500" />
+                    <p className="text-[10px] tracking-[0.3em] text-muted-foreground/80 uppercase">
+                      {artist.discipline}
+                    </p>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
 
           <motion.div
