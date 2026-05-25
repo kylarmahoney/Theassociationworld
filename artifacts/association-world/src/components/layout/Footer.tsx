@@ -54,6 +54,17 @@ export function Footer() {
             <p className="text-xs text-muted-foreground/50 tracking-widest uppercase">
               &copy; {currentYear} The Association World. All Rights Reserved.
             </p>
+            <p className="text-[10px] tracking-widest uppercase text-primary/40 text-center">
+              Website by{" "}
+              <a
+                href="https://www.mahoneytechsolutions.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary/50 hover:text-primary/80 no-underline transition-colors"
+              >
+                Mahoney Tech Solutions
+              </a>
+            </p>
           </div>
         </div>
       </div>
