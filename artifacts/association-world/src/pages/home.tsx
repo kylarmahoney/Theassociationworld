@@ -97,7 +97,7 @@ export default function Home() {
               >
                 <video
                   ref={videoRef}
-                  className="absolute inset-0 w-full h-full object-contain"
+                  className="absolute inset-0 w-full h-full object-contain scale-150 md:scale-125"
                   src="/brand/intro.mp4"
                   autoPlay
                   muted
