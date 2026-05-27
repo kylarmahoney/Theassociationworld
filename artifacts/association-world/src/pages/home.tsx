@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { PageLayout, revealVariants, staggerContainer } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Volume2, VolumeX } from "lucide-react";
 import { djs, handleDjImgError } from "@/data/djs";
 import { artists } from "@/data/artists";
 
@@ -12,7 +12,19 @@ export default function Home() {
   const [djsOpen, setDjsOpen] = useState(false);
   const [artistsOpen, setArtistsOpen] = useState(false);
   const [videoEnded, setVideoEnded] = useState(false);
+  const [muted, setMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  const toggleMute = () => {
+    const next = !muted;
+    setMuted(next);
+    if (videoRef.current) {
+      videoRef.current.muted = next;
+      if (!next) {
+        videoRef.current.play().catch(() => {});
+      }
+    }
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -94,14 +106,24 @@ export default function Home() {
                   onEnded={() => setVideoEnded(true)}
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/50 to-background pointer-events-none" />
-                <button
-                  type="button"
-                  onClick={skipVideo}
-                  className="absolute bottom-6 right-6 md:bottom-8 md:right-8 z-20 px-4 py-2 border border-primary/40 bg-background/60 backdrop-blur-sm text-primary text-[10px] tracking-[0.3em] uppercase hover:bg-primary hover:text-primary-foreground transition-colors duration-300 rounded-none"
-                  aria-label="Skip intro video"
-                >
-                  Skip ›
-                </button>
+                <div className="absolute bottom-6 right-6 md:bottom-8 md:right-8 z-20 flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={toggleMute}
+                    className="w-10 h-10 flex items-center justify-center border border-primary/40 bg-background/60 backdrop-blur-sm text-primary hover:bg-primary hover:text-primary-foreground transition-colors duration-300 rounded-none"
+                    aria-label={muted ? "Unmute video" : "Mute video"}
+                  >
+                    {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={skipVideo}
+                    className="px-4 py-2 border border-primary/40 bg-background/60 backdrop-blur-sm text-primary text-[10px] tracking-[0.3em] uppercase hover:bg-primary hover:text-primary-foreground transition-colors duration-300 rounded-none"
+                    aria-label="Skip intro video"
+                  >
+                    Skip ›
+                  </button>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
@@ -115,7 +137,7 @@ export default function Home() {
             >
               <motion.div variants={heroReveal} className="space-y-4">
                 <h1 className="text-5xl md:text-7xl lg:text-9xl font-serif text-transparent bg-clip-text bg-gradient-to-b from-[#f5e6b8] via-[#c9a961] to-[#8a6f2e] tracking-[0.1em] drop-shadow-[0_0_40px_rgba(201,169,97,0.6)]">
-                  ASSOCIATION WORLD
+                  THE ASSOCIATION WORLD
                 </h1>
                 <p className="text-primary tracking-[0.3em] md:tracking-[0.5em] text-sm md:text-base uppercase font-medium">Loyalty. RESPECT. Silence. Unity.</p>
               </motion.div>
