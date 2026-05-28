@@ -12,7 +12,7 @@ export default function Home() {
   const [djsOpen, setDjsOpen] = useState(false);
   const [artistsOpen, setArtistsOpen] = useState(false);
   const [videoEnded, setVideoEnded] = useState(false);
-  const [muted, setMuted] = useState(false);
+  const [muted, setMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const toggleMute = () => {
@@ -25,6 +25,22 @@ export default function Home() {
       }
     }
   };
+
+  useEffect(() => {
+    const unmuteOnInteract = () => {
+      if (videoRef.current && videoRef.current.muted) {
+        videoRef.current.muted = false;
+        setMuted(false);
+        videoRef.current.play().catch(() => {});
+      }
+    };
+    window.addEventListener("pointerdown", unmuteOnInteract, { once: true });
+    window.addEventListener("keydown", unmuteOnInteract, { once: true });
+    return () => {
+      window.removeEventListener("pointerdown", unmuteOnInteract);
+      window.removeEventListener("keydown", unmuteOnInteract);
+    };
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -100,6 +116,7 @@ export default function Home() {
                   className="absolute inset-0 w-full h-full object-contain scale-150 md:scale-125"
                   src="/brand/intro.mp4"
                   autoPlay
+                  muted
                   playsInline
                   preload="auto"
                   onEnded={() => setVideoEnded(true)}
