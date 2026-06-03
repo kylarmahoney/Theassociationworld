@@ -204,7 +204,17 @@ export default function Home() {
                 className="relative h-[600px] flex items-center justify-center"
               >
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent opacity-50 blur-2xl" />
-                <img src="/brand/mascot.png" alt="Silence" className="h-full object-contain relative z-10 drop-shadow-[0_0_50px_rgba(201,169,97,0.3)] animate-pulse-slow" />
+                <div className="relative z-10 h-full flex items-center justify-center">
+                  <img src="/brand/hadrian-silence.jpeg" alt="Move In Silence — Hadrian" className="h-full object-contain drop-shadow-[0_0_50px_rgba(0,0,0,0.6)]" />
+                  <div className="absolute top-[18%] left-1/2 -translate-x-1/2 w-full text-center px-6 pointer-events-none">
+                    <p className="font-serif text-2xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-b from-[#f5e6b8] via-[#c9a961] to-[#8a6f2e] tracking-[0.15em] uppercase drop-shadow-[0_2px_20px_rgba(0,0,0,0.9)]">
+                      Move In Silence
+                    </p>
+                    <p className="mt-2 text-primary/80 text-xs md:text-sm tracking-[0.3em] uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
+                      — Hadrian
+                    </p>
+                  </div>
+                </div>
               </motion.div>
             </div>
           </div>
