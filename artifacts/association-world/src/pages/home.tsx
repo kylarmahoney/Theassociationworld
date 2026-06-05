@@ -210,7 +210,7 @@ export default function Home() {
                     <p className="font-serif font-bold text-3xl md:text-5xl text-transparent bg-clip-text bg-gradient-to-b from-[#f5e6b8] via-[#c9a961] to-[#8a6f2e] tracking-[0.15em] uppercase drop-shadow-[0_2px_20px_rgba(0,0,0,0.95)]">
                       Move In Silence
                     </p>
-                    <p className="mt-2 text-primary font-semibold text-sm md:text-base tracking-[0.3em] uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
+                    <p className="mt-6 text-primary font-semibold text-sm md:text-base tracking-[0.3em] uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
                       — Hadrian
                     </p>
                   </div>
