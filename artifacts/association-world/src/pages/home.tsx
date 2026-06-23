@@ -206,7 +206,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent opacity-50 blur-2xl" />
                 <div className="relative z-10 h-full flex items-center justify-center">
                   <img src="/brand/hadrian-silence.jpeg" alt="Move In Silence — Hadrian" className="h-full object-contain drop-shadow-[0_0_50px_rgba(0,0,0,0.6)]" />
-                  <div className="absolute top-[26%] left-1/2 -translate-x-1/2 w-full text-center px-6 pointer-events-none">
+                  <div className="absolute top-[18%] left-1/2 -translate-x-1/2 w-full text-center px-6 pointer-events-none">
                     <p className="font-serif font-bold text-3xl md:text-5xl leading-tight text-transparent bg-clip-text bg-gradient-to-b from-[#f5e6b8] via-[#c9a961] to-[#8a6f2e] tracking-[0.15em] uppercase drop-shadow-[0_2px_20px_rgba(0,0,0,0.95)]">
                       Move<br />In<br />Silence
                     </p>
