@@ -34,13 +34,6 @@ const roster: RosterEntry[] = [
     bio: "Rap and hip-hop with a calm, calculated edge — streetwise storytelling, deliberate cadence, and a quiet command of the mic.",
     photos: ["/artists/yodataliban-1.jpeg", "/artists/yodataliban-2.jpeg"],
   },
-  {
-    id: 4,
-    name: "KISSEZ",
-    discipline: "Rap / Hip-Hop / R&B",
-    bio: "Rap, hip-hop and R&B with a velvet edge — confident pen, melodic delivery, and a presence built for the stage.",
-    photos: ["/artists/kissez-1.jpeg", "/artists/kissez-2.jpeg"],
-  },
 ];
 
 export const artists: Artist[] = roster.map((a) => ({
